@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Text;
 using System;
+using YamlDotNet.Core;
 
 class Solution
 {
@@ -22,58 +23,60 @@ class Solution
         //recordbreaker.starter(args);
         //BetweenTwoSets.starter(args);
         //AppleandOrange.starter(args);
-        NumberLineJumps.starter(args);
+        //NumberLineJumps.starter(args);
         //GradingStudents.starter(args);
         //questions.mirror(args);
+        DictionariesAndMaps.starter(args);
+        Console.ReadLine();
     }
 }
 class questions
 {
     #region  Cats & Mouse
     static string catAndMouseWorker(int a, int b, int m)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        int da = m - a >= 0 ? m - a : a - m;
+        int db = m - b >= 0 ? m - b : b - m;
+
+        if (da < db)
         {
-            StringBuilder sb = new StringBuilder();
-
-            int da = m - a >= 0 ? m - a : a - m;
-            int db = m - b >= 0 ? m - b : b - m;
-
-            if (da < db)
-            {
-                sb.Append("Cat A");
-            }
-            else if (db < da)
-            {
-                sb.Append("Cat B");
-            }
-            else
-            {
-                {
-                    sb.Append("Mouse C");
-                }
-            }
-            return sb.ToString();
+            sb.Append("Cat A");
         }
-
-        public static void catAndMouse(string[] args)
+        else if (db < da)
         {
-            int q = Convert.ToInt32(Console.ReadLine());
-
-            for (int qItr = 0; qItr < q; qItr++)
-            {
-                string[] xyz = Console.ReadLine().Split(' ');
-
-                int x = Convert.ToInt32(xyz[0]);
-
-                int y = Convert.ToInt32(xyz[1]);
-
-                int z = Convert.ToInt32(xyz[2]);
-
-                string result = catAndMouseWorker(x, y, z);
-
-                Console.WriteLine(result);
-            }
-            Console.ReadLine();
+            sb.Append("Cat B");
         }
+        else
+        {
+            {
+                sb.Append("Mouse C");
+            }
+        }
+        return sb.ToString();
+    }
+
+    public static void catAndMouse(string[] args)
+    {
+        int q = Convert.ToInt32(Console.ReadLine());
+
+        for (int qItr = 0; qItr < q; qItr++)
+        {
+            string[] xyz = Console.ReadLine().Split(' ');
+
+            int x = Convert.ToInt32(xyz[0]);
+
+            int y = Convert.ToInt32(xyz[1]);
+
+            int z = Convert.ToInt32(xyz[2]);
+
+            string result = catAndMouseWorker(x, y, z);
+
+            Console.WriteLine(result);
+        }
+        Console.ReadLine();
+    }
     #endregion
     #region mirror
     public static void mirror(string[] args)
@@ -311,12 +314,12 @@ class NumberLineJumps
 
         string result = kangaroo(x1, v1, x2, v2);
 
-       /* textWriter.WriteLine(result);
+        /* textWriter.WriteLine(result);
 
-        textWriter.Flush();
-        textWriter.Close();
-       */
-       Console.WriteLine(result);
+         textWriter.Flush();
+         textWriter.Close();
+        */
+        Console.WriteLine(result);
     }
     public static string kangaroo(int x1, int v1, int x2, int v2)
     {
@@ -399,7 +402,7 @@ class GradingStudents
 {
     public static void starter(string[] args)
     {
-        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+        // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
         int gradesCount = Convert.ToInt32(Console.ReadLine().Trim());
 
@@ -411,12 +414,14 @@ class GradingStudents
             grades.Add(gradesItem);
         }
 
-        List<int> result =gradingStudents(grades);
+        List<int> result = gradingStudents(grades);
 
-        textWriter.WriteLine(String.Join("\n", result));
+        /*  textWriter.WriteLine(String.Join("\n", result));
 
-        textWriter.Flush();
-        textWriter.Close();
+          textWriter.Flush();
+          textWriter.Close();
+        */
+        Console.WriteLine(String.Join("\n", result));
     }
 
     public static List<int> gradingStudents(List<int> grades)
@@ -443,4 +448,38 @@ class GradingStudents
         return result;
     }
 }
-
+class DictionariesAndMaps
+{
+    public static void starter(String[] args)
+    {
+        int n = int.Parse(Console.ReadLine().TrimEnd());
+        Dictionary<string, string> phonebook = new Dictionary<string, string>();
+        string[] search = new string[n];
+        for (int i = 0; i < n; i++)
+        {
+            string[] entry = Console.ReadLine().TrimEnd().Split(' ').ToArray();
+            phonebook.Add(entry[0], entry[1]);
+        }
+        int j = 0;
+        string input;
+        while (!string.IsNullOrEmpty(input = Console.ReadLine().TrimEnd()))
+        {            
+            search[j] = input;
+            j++;
+        }
+        search=search.Where(w=>w!=null).ToArray();
+        for (int i = 0; i < search.Length; i++)
+        {
+            if (string.IsNullOrEmpty(search[i]))
+            { i=search.Length+1; break; }
+            if (phonebook.ContainsKey(search[i]))
+            {
+                Console.WriteLine(search[i] + "=" + phonebook[search[i]]);
+            }
+            else
+            {
+                Console.WriteLine("Not found");
+            }
+        }
+    }
+}
