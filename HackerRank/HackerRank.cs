@@ -30,7 +30,9 @@ class Solution
         //DictionariesAndMaps.starter(args);
         //HurdleRace.starter(args);
         //DesignerPDFViewer.starter(args);
-        ElectronicsShop.starter(args);
+        //ElectronicsShop.starter(args);
+        Factorial.starter(args);
+
         Console.ReadLine();
     }
 }
@@ -608,3 +610,28 @@ class ElectronicsShop
 
     }
 }
+class Factorial
+{
+    public static void starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int result = factorial(n);
+
+        Console.WriteLine(result);
+    }
+     static int factorial(int n)
+    {
+        int v = 1;
+        for (int i = 1; i <= n; i++)
+        {
+            v = v * i;
+        }
+        return v;
+
+    }
+}
+
+
+
+
