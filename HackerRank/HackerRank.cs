@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 using YamlDotNet.Core;
+using System.ComponentModel.Design;
 
 class Solution
 {
@@ -26,7 +27,10 @@ class Solution
         //NumberLineJumps.starter(args);
         //GradingStudents.starter(args);
         //questions.mirror(args);
-        DictionariesAndMaps.starter(args);
+        //DictionariesAndMaps.starter(args);
+        //HurdleRace.starter(args);
+        //DesignerPDFViewer.starter(args);
+        ElectronicsShop.starter(args);
         Console.ReadLine();
     }
 }
@@ -481,5 +485,126 @@ class DictionariesAndMaps
                 Console.WriteLine("Not found");
             }
         }
+    }
+}
+class HurdleRace
+{
+     static int hurdleRace(int k, List<int> height)
+    {
+        int result = (height.Max() - k) >= 0 ? (height.Max() - k) : 0;
+        return result;
+    }
+
+    public static void starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> height = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(heightTemp => Convert.ToInt32(heightTemp)).ToList();
+
+        int result = hurdleRace(k, height);
+        /*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+        */
+        Console.WriteLine(result);
+    }
+}
+class DesignerPDFViewer
+{
+    public static void starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+        List<int> h = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(hTemp => Convert.ToInt32(hTemp)).ToList();
+        string word = Console.ReadLine();
+        int result =designerPdfViewer(h, word);
+        /*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();,
+        */
+        Console.WriteLine(result);
+    }
+    static int designerPdfViewer(List<int> h, string word)
+    {
+        Dictionary<char, int> map =mapper(h);
+        char[] letters=word.ToUpper().ToCharArray();
+        int max = 0;
+        foreach(char c in letters) 
+        {
+            max = map[c] > max ? map[c] :max;
+        }
+        return (word.Length * max);
+    }
+    private static Dictionary<char,int> mapper(List<int> h)
+    {
+        Dictionary<char, int> map = new Dictionary<char, int>();
+         char[] letters = "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z".Split(", ").ToList().Select(s=>char.Parse(s)).ToArray();
+        for(int i = 0;i<h.Count;i++)
+        {
+            map.Add(letters[i], h.ToArray()[i] );
+        }
+        return map;
+    }
+}
+class ElectronicsShop
+{
+    static int getMoneySpent(int[] keyboards, int[] drives, int b)
+    {
+        int[] fkeyboards=keyboards.Where(w=>w<b).ToArray(); 
+        int[] fdrives = drives.Where(w=>w<b).ToArray(); 
+
+        int result = -1;
+        foreach (int k in fkeyboards)
+        {
+            foreach (int d in fdrives)
+            {
+                int sum = k + d;
+                if (sum <= b)
+                {
+                    result =  sum> result ? sum: result;
+                }
+            }
+        }
+        return result;
+    }
+    public static void starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        string[] bnm = Console.ReadLine().Split(' ');
+
+        int b = Convert.ToInt32(bnm[0]);
+
+        int n = Convert.ToInt32(bnm[1]);
+
+        int m = Convert.ToInt32(bnm[2]);
+
+        int[] keyboards = Array.ConvertAll(Console.ReadLine().Split(' '), keyboardsTemp => Convert.ToInt32(keyboardsTemp))
+        ;
+
+        int[] drives = Array.ConvertAll(Console.ReadLine().Split(' '), drivesTemp => Convert.ToInt32(drivesTemp))
+        ;
+        /*
+         * The maximum amount of money she can spend on a keyboard and USB drive, or -1 if she can't purchase both items
+         */
+
+        int moneySpent = getMoneySpent(keyboards, drives, b);
+        /*
+        textWriter.WriteLine(moneySpent);
+
+        textWriter.Flush();
+        textWriter.Close();
+        */
+        Console.WriteLine(moneySpent);
+
     }
 }
