@@ -13,6 +13,7 @@ using System.Text;
 using System;
 using YamlDotNet.Core;
 using System.ComponentModel.Design;
+using YamlDotNet.Serialization;
 
 class Solution
 {
@@ -31,8 +32,8 @@ class Solution
         //HurdleRace.starter(args);
         //DesignerPDFViewer.starter(args);
         //ElectronicsShop.starter(args);
-        Factorial.starter(args);
-
+        //Factorial.starter(args);
+        BinaryNumbers.starter(args);
         Console.ReadLine();
     }
 }
@@ -628,10 +629,36 @@ class Factorial
             v = v * i;
         }
         return v;
-
     }
 }
+class BinaryNumbers
+{
+    static char[] converter(int input)
+    {
+        return Convert.ToString(input, 2).ToArray() ;
+    }
+    private static int repeatcounter(char[] divided)
+    {
+        int max = 1;
+        for (int i = 0; i < divided.Length - 1; i++)
+        {
+            int rpt = 1;
+         for (int j = i+1;j< divided.Length;j++)
+            {
+                if (divided[i] == divided[j]) rpt++;
+                else break;
+            }
+   max= max<rpt? rpt:max;
 
+        }
+        return max;
+    }
+    public static void starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        char[] divided = converter(n);
+        Console.WriteLine(repeatcounter(divided));
+    }
 
-
-
+   
+}
