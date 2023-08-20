@@ -14,6 +14,7 @@ using System;
 using YamlDotNet.Core;
 using System.ComponentModel.Design;
 using YamlDotNet.Serialization;
+using System.Reflection.Metadata.Ecma335;
 
 class Solution
 {
@@ -33,7 +34,10 @@ class Solution
         //DesignerPDFViewer.starter(args);
         //ElectronicsShop.starter(args);
         //Factorial.starter(args);
-        BinaryNumbers.starter(args);
+        //BinaryNumbers.starter(args);
+        //UtopianTree.starter(args);
+        //AngryProfessor.starter(args);
+        hourglass.starter(args);
         Console.ReadLine();
     }
 }
@@ -661,4 +665,145 @@ class BinaryNumbers
     }
 
    
+}
+class UtopianTree 
+{
+
+    public static int utopianTree(int n)
+    {
+        int height = 0;
+        for (int i = 0;i<=n;i++)
+        {
+            if (i % 2 == 0)
+            {
+                height++;
+            }
+            else height = 2 * height;
+        }
+        return height;
+    }
+
+public static void starter(string[] args)
+{
+    //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+    int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+    for (int tItr = 0; tItr < t; tItr++)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int result = utopianTree(n);
+
+        //textWriter.WriteLine(result);
+        Console.WriteLine(result);
+    }
+    /*
+    textWriter.Flush();
+    textWriter.Close();
+    */
+}
+}
+class AngryProfessor
+{
+    public static void starter(string[] args)
+    {
+       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int n = Convert.ToInt32(firstMultipleInput[0]);
+
+            int k = Convert.ToInt32(firstMultipleInput[1]);
+
+            List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
+
+            string result = angryProfessor(k, a);
+
+            Console.WriteLine(result);
+        //    textWriter.WriteLine(result);
+        }
+        /*
+        textWriter.Flush();
+        textWriter.Close();
+        */
+    }
+    private static string angryProfessor(int k, List<int> a)
+    {
+        int y = 0;
+        foreach (int i in a)
+        {
+            if (i <= 0) y++;
+        }
+        string result = y < k  ? "YES" : "NO";
+        return result;
+
+    }
+}
+class hourglass
+{
+    public static void starter(string[] args)
+    {
+
+        List<List<int>> arr = new List<List<int>>();
+
+        for (int i = 0; i < 6; i++)
+        {
+            arr.Add(Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList());
+        }
+        int[,] matrix = Arcitech(arr);
+        int[] result=Logic(matrix);
+        //printer(result,matrix);
+        Console.WriteLine(result[0]);
+    }
+
+
+    private static int[,] Arcitech(List<List<int>> input)
+    {
+        int[,] matrix = new int[6, 6];
+        int x = 0;
+        foreach (List<int> row in input)
+        {
+            int y = 0;
+            foreach (int column in row)
+            {
+                matrix[x, y] = column;
+                y++;
+            }
+            x++;
+        }
+        return matrix;
+    }
+    private static int[] Logic(int[,] matrix)
+    {
+        int[] result = new int[3] { -9999, 0, 0 };
+        for (int x = 0; x < 4; x++)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                int val = matrix[x, y] + matrix[x, y + 1] + matrix[x, y + 2]
+                     +
+                     matrix[x + 1, y + 1]
+                     +
+                     matrix[x + 2, y] + matrix[x + 2, y + 1] + matrix[x + 2, y + 2];
+                if (result[0] < val)
+                {
+                    result = new int[] { val, x, y };
+                }
+
+            }
+        }
+        return result;
+    }
+
+    private static void printer(int[] result, int[,] matrix)
+    {
+        Console.WriteLine(matrix[result[1],result[2]].ToString()+" "+ matrix[result[1], result[2]+1].ToString()+ " " + matrix[result[1], result[2]+2].ToString());
+        Console.WriteLine("  "+ matrix[result[1]+1, result[2] + 1].ToString()+ "  ");
+        Console.WriteLine(matrix[result[1]+2, result[2]].ToString()+ " " + matrix[result[1]+2, result[2] + 1].ToString()+ " " + matrix[result[1] + 2, result[2] + 2].ToString());
+    }
 }
