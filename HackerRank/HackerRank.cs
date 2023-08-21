@@ -37,7 +37,9 @@ class Solution
         //BinaryNumbers.starter(args);
         //UtopianTree.starter(args);
         //AngryProfessor.starter(args);
-        hourglass.starter(args);
+        //hourglass.starter(args);
+        //BeautifulDaysattheMovies.starter(args);
+        Inheritance.starter();
         Console.ReadLine();
     }
 }
@@ -474,15 +476,15 @@ class DictionariesAndMaps
         int j = 0;
         string input;
         while (!string.IsNullOrEmpty(input = Console.ReadLine().TrimEnd()))
-        {            
+        {
             search[j] = input;
             j++;
         }
-        search=search.Where(w=>w!=null).ToArray();
+        search = search.Where(w => w != null).ToArray();
         for (int i = 0; i < search.Length; i++)
         {
             if (string.IsNullOrEmpty(search[i]))
-            { i=search.Length+1; break; }
+            { i = search.Length + 1; break; }
             if (phonebook.ContainsKey(search[i]))
             {
                 Console.WriteLine(search[i] + "=" + phonebook[search[i]]);
@@ -496,7 +498,7 @@ class DictionariesAndMaps
 }
 class HurdleRace
 {
-     static int hurdleRace(int k, List<int> height)
+    static int hurdleRace(int k, List<int> height)
     {
         int result = (height.Max() - k) >= 0 ? (height.Max() - k) : 0;
         return result;
@@ -531,7 +533,7 @@ class DesignerPDFViewer
         //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
         List<int> h = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(hTemp => Convert.ToInt32(hTemp)).ToList();
         string word = Console.ReadLine();
-        int result =designerPdfViewer(h, word);
+        int result = designerPdfViewer(h, word);
         /*
         textWriter.WriteLine(result);
 
@@ -542,22 +544,22 @@ class DesignerPDFViewer
     }
     static int designerPdfViewer(List<int> h, string word)
     {
-        Dictionary<char, int> map =mapper(h);
-        char[] letters=word.ToUpper().ToCharArray();
+        Dictionary<char, int> map = mapper(h);
+        char[] letters = word.ToUpper().ToCharArray();
         int max = 0;
-        foreach(char c in letters) 
+        foreach (char c in letters)
         {
-            max = map[c] > max ? map[c] :max;
+            max = map[c] > max ? map[c] : max;
         }
         return (word.Length * max);
     }
-    private static Dictionary<char,int> mapper(List<int> h)
+    private static Dictionary<char, int> mapper(List<int> h)
     {
         Dictionary<char, int> map = new Dictionary<char, int>();
-         char[] letters = "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z".Split(", ").ToList().Select(s=>char.Parse(s)).ToArray();
-        for(int i = 0;i<h.Count;i++)
+        char[] letters = "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z".Split(", ").ToList().Select(s => char.Parse(s)).ToArray();
+        for (int i = 0; i < h.Count; i++)
         {
-            map.Add(letters[i], h.ToArray()[i] );
+            map.Add(letters[i], h.ToArray()[i]);
         }
         return map;
     }
@@ -566,8 +568,8 @@ class ElectronicsShop
 {
     static int getMoneySpent(int[] keyboards, int[] drives, int b)
     {
-        int[] fkeyboards=keyboards.Where(w=>w<b).ToArray(); 
-        int[] fdrives = drives.Where(w=>w<b).ToArray(); 
+        int[] fkeyboards = keyboards.Where(w => w < b).ToArray();
+        int[] fdrives = drives.Where(w => w < b).ToArray();
 
         int result = -1;
         foreach (int k in fkeyboards)
@@ -577,7 +579,7 @@ class ElectronicsShop
                 int sum = k + d;
                 if (sum <= b)
                 {
-                    result =  sum> result ? sum: result;
+                    result = sum > result ? sum : result;
                 }
             }
         }
@@ -625,7 +627,7 @@ class Factorial
 
         Console.WriteLine(result);
     }
-     static int factorial(int n)
+    static int factorial(int n)
     {
         int v = 1;
         for (int i = 1; i <= n; i++)
@@ -639,7 +641,7 @@ class BinaryNumbers
 {
     static char[] converter(int input)
     {
-        return Convert.ToString(input, 2).ToArray() ;
+        return Convert.ToString(input, 2).ToArray();
     }
     private static int repeatcounter(char[] divided)
     {
@@ -647,12 +649,12 @@ class BinaryNumbers
         for (int i = 0; i < divided.Length - 1; i++)
         {
             int rpt = 1;
-         for (int j = i+1;j< divided.Length;j++)
+            for (int j = i + 1; j < divided.Length; j++)
             {
                 if (divided[i] == divided[j]) rpt++;
                 else break;
             }
-   max= max<rpt? rpt:max;
+            max = max < rpt ? rpt : max;
 
         }
         return max;
@@ -664,15 +666,15 @@ class BinaryNumbers
         Console.WriteLine(repeatcounter(divided));
     }
 
-   
+
 }
-class UtopianTree 
+class UtopianTree
 {
 
     public static int utopianTree(int n)
     {
         int height = 0;
-        for (int i = 0;i<=n;i++)
+        for (int i = 0; i <= n; i++)
         {
             if (i % 2 == 0)
             {
@@ -683,32 +685,32 @@ class UtopianTree
         return height;
     }
 
-public static void starter(string[] args)
-{
-    //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
-
-    int t = Convert.ToInt32(Console.ReadLine().Trim());
-
-    for (int tItr = 0; tItr < t; tItr++)
+    public static void starter(string[] args)
     {
-        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
-        int result = utopianTree(n);
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
 
-        //textWriter.WriteLine(result);
-        Console.WriteLine(result);
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+            int result = utopianTree(n);
+
+            //textWriter.WriteLine(result);
+            Console.WriteLine(result);
+        }
+        /*
+        textWriter.Flush();
+        textWriter.Close();
+        */
     }
-    /*
-    textWriter.Flush();
-    textWriter.Close();
-    */
-}
 }
 class AngryProfessor
 {
     public static void starter(string[] args)
     {
-       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+        // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
         int t = Convert.ToInt32(Console.ReadLine().Trim());
 
@@ -725,7 +727,7 @@ class AngryProfessor
             string result = angryProfessor(k, a);
 
             Console.WriteLine(result);
-        //    textWriter.WriteLine(result);
+            //    textWriter.WriteLine(result);
         }
         /*
         textWriter.Flush();
@@ -739,7 +741,7 @@ class AngryProfessor
         {
             if (i <= 0) y++;
         }
-        string result = y < k  ? "YES" : "NO";
+        string result = y < k ? "YES" : "NO";
         return result;
 
     }
@@ -756,7 +758,7 @@ class hourglass
             arr.Add(Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList());
         }
         int[,] matrix = Arcitech(arr);
-        int[] result=Logic(matrix);
+        int[] result = Logic(matrix);
         //printer(result,matrix);
         Console.WriteLine(result[0]);
     }
@@ -802,8 +804,123 @@ class hourglass
 
     private static void printer(int[] result, int[,] matrix)
     {
-        Console.WriteLine(matrix[result[1],result[2]].ToString()+" "+ matrix[result[1], result[2]+1].ToString()+ " " + matrix[result[1], result[2]+2].ToString());
-        Console.WriteLine("  "+ matrix[result[1]+1, result[2] + 1].ToString()+ "  ");
-        Console.WriteLine(matrix[result[1]+2, result[2]].ToString()+ " " + matrix[result[1]+2, result[2] + 1].ToString()+ " " + matrix[result[1] + 2, result[2] + 2].ToString());
+        Console.WriteLine(matrix[result[1], result[2]].ToString() + " " + matrix[result[1], result[2] + 1].ToString() + " " + matrix[result[1], result[2] + 2].ToString());
+        Console.WriteLine("  " + matrix[result[1] + 1, result[2] + 1].ToString() + "  ");
+        Console.WriteLine(matrix[result[1] + 2, result[2]].ToString() + " " + matrix[result[1] + 2, result[2] + 1].ToString() + " " + matrix[result[1] + 2, result[2] + 2].ToString());
+    }
+}
+class BeautifulDaysattheMovies
+{
+    public static void starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int i = Convert.ToInt32(firstMultipleInput[0]);
+
+        int j = Convert.ToInt32(firstMultipleInput[1]);
+
+        int k = Convert.ToInt32(firstMultipleInput[2]);
+
+        int result = beautifulDays(i, j, k);
+        /*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+        */
+        Console.WriteLine(result);
+    }
+    public static int beautifulDays(int i, int j, int k)
+    {
+        int result = 0;
+        for (int d = i; d <= j; d++)
+        {
+            char[] sd = d.ToString().ToArray();
+            StringBuilder sb = new StringBuilder();
+            for (int x = sd.Length - 1; x >= 0; x--)
+            {
+                sb.Append(sd[x]);
+            }
+            int td = int.Parse(sb.ToString());
+            float db = float.Parse(Math.Abs(d - td).ToString()) / float.Parse(k.ToString());
+            int ib = Math.Abs(d - td) / k;
+
+            if ((db - ib) == 0) result++;
+        }
+
+
+        return result;
+
+    }
+
+}
+class Inheritance
+{
+    public static void starter()
+    {
+        string[] inputs = Console.ReadLine().Split();
+        string firstName = inputs[0];
+        string lastName = inputs[1];
+        int id = Convert.ToInt32(inputs[2]);
+        int numScores = Convert.ToInt32(Console.ReadLine());
+        inputs = Console.ReadLine().Split();
+        int[] scores = new int[numScores];
+        for (int i = 0; i < numScores; i++)
+        {
+            scores[i] = Convert.ToInt32(inputs[i]);
+        }
+
+        Student s = new Student(firstName, lastName, id, scores);
+        s.printPerson();
+        Console.WriteLine("Grade: " + s.Calculate() + "\n");
+    }
+    public class Person
+    {
+        protected string firstName;
+        protected string lastName;
+        protected int id;
+
+        public Person() { }
+        public Person(string firstName, string lastName, int identification)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.id = identification;
+        }
+        public void printPerson()
+        {
+            Console.WriteLine("Name: " + lastName + ", " + firstName + "\nID: " + id);
+        }
+    }
+    public class Student : Person
+    {
+        private int[] testScores;
+
+        public Student(string firstName, string lastName, int identification, int[] scores)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.id = identification;
+            this.testScores = scores;
+        }
+         public char Calculate()
+        {
+            int sum= 0;
+            foreach (int score in this.testScores) 
+            {
+                sum += score;
+            }
+            sum=sum/testScores.Length;
+            char result = 'O';
+            if (sum < 40) result = 'T';
+            else if (sum >= 40 && sum <55) result = 'D';
+            else if (sum >= 55 && sum <70) result = 'P';
+            else if (sum >= 70 && sum <80) result = 'A';
+            else if (sum >= 80 && sum <90) result = 'E';
+            return result;
+        }
+
     }
 }
