@@ -40,7 +40,8 @@ class Solution
         //hourglass.starter(args);
         //BeautifulDaysattheMovies.starter(args);
         //Inheritance.starter();
-        LinkedList.starter(args);
+        //LinkedList.starter(args);
+        FindDigits.starter(args);
         Console.ReadLine();
     }
 }
@@ -979,3 +980,41 @@ class LinkedList // Nextvall yeni bir nesne değil sadece pointer!!!!
         display(head);
     }
 }
+class FindDigits
+{
+
+    public static int findDigits(int n)
+    {
+            int result = 0;
+            char[] numbers = n.ToString().ToArray();
+            foreach (char c in numbers)
+            {
+                int divider = int.Parse(c.ToString());
+                if (divider != 0) 
+                result = (n % divider == 0) ? result + 1 : result;
+            }
+
+            return result;
+    }
+
+    public static void starter(string[] args)
+    {
+       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+            int result =findDigits(n);
+
+           // textWriter.WriteLine(result);
+           Console.WriteLine(result);
+        }
+
+      //  textWriter.Flush();
+      // textWriter.Close();
+    }
+}
+
