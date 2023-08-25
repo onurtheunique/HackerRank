@@ -15,6 +15,7 @@ using YamlDotNet.Core;
 using System.ComponentModel.Design;
 using YamlDotNet.Serialization;
 using System.Reflection.Metadata.Ecma335;
+using static System.Formats.Asn1.AsnWriter;
 
 class Solution
 {
@@ -41,6 +42,7 @@ class Solution
         //BeautifulDaysattheMovies.starter(args);
         //Inheritance.starter();
         //LinkedList.starter(args);
+        //Scope.starter(args);
         FindDigits.starter(args);
         Console.ReadLine();
     }
@@ -924,6 +926,49 @@ class Inheritance
             return result;
         }
 
+    }
+}
+class Scope
+{
+    public class Difference
+    {
+        private int[] elements;
+        public int maximumDifference;
+        public Difference()
+        {
+
+        }
+        public Difference(int[] elmns)
+        {
+            this.elements = elmns;
+        }
+
+        public void computeDifference()
+        {
+            maximumDifference = int.MinValue;
+            foreach (int bs in this.elements)
+            {
+                foreach (int df in elements)
+                {
+                    int f = Math.Abs(bs - df);
+                    maximumDifference = maximumDifference < f ? f : maximumDifference;
+                }
+            }
+        }
+
+
+    }
+    public static void starter(string[] args)
+    {
+        Convert.ToInt32(Console.ReadLine());
+
+        int[] a = Console.ReadLine().Split(' ').Select(x => Convert.ToInt32(x)).ToArray();
+
+        Difference d = new Difference(a);
+
+        d.computeDifference();
+
+        Console.Write(d.maximumDifference);
     }
 }
 class LinkedList // Nextvall yeni bir nesne değil sadece pointer!!!!
