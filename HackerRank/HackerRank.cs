@@ -39,7 +39,8 @@ class Solution
         //AngryProfessor.starter(args);
         //hourglass.starter(args);
         //BeautifulDaysattheMovies.starter(args);
-        Inheritance.starter();
+        //Inheritance.starter();
+        LinkedList.starter(args);
         Console.ReadLine();
     }
 }
@@ -922,5 +923,59 @@ class Inheritance
             return result;
         }
 
+    }
+}
+class LinkedList // Nextvall yeni bir nesne değil sadece pointer!!!!
+{
+    class Node
+    {
+        public int data;
+        public Node next;
+        public Node(int d)
+        {
+            data = d;
+            next = null;
+        }
+
+    }
+
+    private static Node insert(Node head, int data)
+    {
+        if(head==null)
+        {
+            return new Node(data);
+        }
+
+        Node next = new Node(data);
+        Node nextval = head;
+        while(nextval.next!=null)
+        {
+            nextval= nextval.next;
+        }
+        nextval.next = next;
+        return head;
+
+    }
+
+    private static void display(Node head)
+    {
+        Node start = head;
+        while (start != null)
+        {
+            Console.Write(start.data + " ");
+            start = start.next;
+        }
+    }
+    public static void starter(String[] args)
+    {
+
+        Node head = null;
+        int T = Int32.Parse(Console.ReadLine());
+        while (T-- > 0)
+        {
+            int data = Int32.Parse(Console.ReadLine());
+            head = insert(head, data);
+        }
+        display(head);
     }
 }
