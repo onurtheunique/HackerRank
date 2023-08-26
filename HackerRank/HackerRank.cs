@@ -43,7 +43,8 @@ class Solution
         //Inheritance.starter();
         //LinkedList.starter(args);
         //Scope.starter(args);
-        FindDigits.starter(args);
+        //FindDigits.starter(args);
+        MoreExceptions.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1060,6 +1061,54 @@ class FindDigits
 
       //  textWriter.Flush();
       // textWriter.Close();
+    }
+}
+class MoreExceptions
+{
+    public static void Starter(String[] args)
+    {
+        Calculator myCalculator = new Calculator();
+        int T = Int32.Parse(Console.ReadLine());
+        while (T-- > 0)
+        {
+            string[] num = Console.ReadLine().Split();
+            int n = int.Parse(num[0]);
+            int p = int.Parse(num[1]);
+            try
+            {
+                int ans = myCalculator.power(n, p);
+                Console.WriteLine(ans);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+        }
+    }
+    private class Calculator
+    {
+        protected int n;
+        protected int p;
+        public Calculator() { }
+        public Calculator(int pn, int pp)
+        {
+            this.n = pn;
+            this.p = pp;
+        }
+        public  int power(int n,int p)
+        {
+            if(n<0 || p<0)
+            {
+                throw new Exception("n and p should be non-negative");          
+            }
+            int sum = 1;
+            for (int i = 0; i < p; i++)
+            {
+                sum = sum * n;
+            }
+            return sum;
+        }
     }
 }
 
