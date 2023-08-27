@@ -1069,7 +1069,6 @@ class FindDigits
       // textWriter.Close();
     }
 }
-
 class viralAdvertisingn
 {
     public static void Starter(string[] args)
@@ -1128,15 +1127,19 @@ class SubarrayDivision
     public static int birthday(List<int> s, int d, int m)
     {
         int ways = 0;
-        int sum = 0;
-        foreach(int i in s) 
+        for (var i = 0; i < s.Count; i++)
         {
-            var ary = s.Skip(i)<;
+            var segmentToSum = s.Skip(i).Take(m);
+            var segmentSum = segmentToSum.Sum();
+
+            if (segmentSum == d)
+            {
+                ways++;
+            }
         }
         return ways;
     }
 }
-
 class MoreExceptions
 {
     public static void Starter(String[] args)
