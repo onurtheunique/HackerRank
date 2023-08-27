@@ -44,7 +44,8 @@ class Solution
         //LinkedList.starter(args);
         //Scope.starter(args);
         //FindDigits.starter(args);
-        MoreExceptions.Starter(args);
+        //MoreExceptions.Starter(args);
+        Palindrom.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1111,4 +1112,75 @@ class MoreExceptions
         }
     }
 }
+public class Palindrom
+{
 
+    //Write your code here
+    Stack<char> stack = new Stack<char>();
+     Queue quete=new Queue();
+    public Palindrom()
+    {
+         
+    }
+
+    void pushCharacter(char c)
+    {
+        stack.Push(c);
+    }    
+    void enqueueCharacter(char c)
+    {
+       quete.Enqueue(c);
+    }    
+      char popCharacter()
+    {
+        return stack.Pop();
+    }       
+     char dequeueCharacter()
+    {
+        return (char)quete.Dequeue();
+    }
+
+
+    public static void Starter(String[] args)
+    {
+        // read the string s.
+        string s = Console.ReadLine();
+
+        // create the Solution class object p.
+        //Solution obj = new Solution();
+        Palindrom obj = new Palindrom();
+
+        // push/enqueue all the characters of string s to stack.
+        foreach (char c in s)
+        {
+            obj.pushCharacter(c);
+            obj.enqueueCharacter(c);
+        }
+
+        bool isPalindrome = true;
+
+        // pop the top character from stack.
+        // dequeue the first character from queue.
+        // compare both the characters.
+        for (int i = 0; i < s.Length / 2; i++)
+        {
+            if (obj.popCharacter() != obj.dequeueCharacter())
+            {
+                isPalindrome = false;
+
+                break;
+            }
+        }
+
+        // finally print whether string s is palindrome or not.
+        if (isPalindrome)
+        {
+            Console.Write("The word, {0}, is a palindrome.", s);
+        }
+        else
+        {
+            Console.Write("The word, {0}, is not a palindrome.", s);
+        }
+    }
+
+}
