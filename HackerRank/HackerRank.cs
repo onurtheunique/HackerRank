@@ -43,7 +43,9 @@ class Solution
         //Inheritance.starter();
         //LinkedList.starter(args);
         //Scope.starter(args);
-        FindDigits.starter(args);
+        //FindDigits.starter(args);
+        //MoreExceptions.Starter(args);
+        Palindrom.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1062,4 +1064,123 @@ class FindDigits
       // textWriter.Close();
     }
 }
+class MoreExceptions
+{
+    public static void Starter(String[] args)
+    {
+        Calculator myCalculator = new Calculator();
+        int T = Int32.Parse(Console.ReadLine());
+        while (T-- > 0)
+        {
+            string[] num = Console.ReadLine().Split();
+            int n = int.Parse(num[0]);
+            int p = int.Parse(num[1]);
+            try
+            {
+                int ans = myCalculator.power(n, p);
+                Console.WriteLine(ans);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
 
+            }
+        }
+    }
+    private class Calculator
+    {
+        protected int n;
+        protected int p;
+        public Calculator() { }
+        public Calculator(int pn, int pp)
+        {
+            this.n = pn;
+            this.p = pp;
+        }
+        public  int power(int n,int p)
+        {
+            if(n<0 || p<0)
+            {
+                throw new Exception("n and p should be non-negative");          
+            }
+            int sum = 1;
+            for (int i = 0; i < p; i++)
+            {
+                sum = sum * n;
+            }
+            return sum;
+        }
+    }
+}
+public class Palindrom
+{
+
+    //Write your code here
+    Stack<char> stack = new Stack<char>();
+     Queue quete=new Queue();
+    public Palindrom()
+    {
+         
+    }
+
+    void pushCharacter(char c)
+    {
+        stack.Push(c);
+    }    
+    void enqueueCharacter(char c)
+    {
+       quete.Enqueue(c);
+    }    
+      char popCharacter()
+    {
+        return stack.Pop();
+    }       
+     char dequeueCharacter()
+    {
+        return (char)quete.Dequeue();
+    }
+
+
+    public static void Starter(String[] args)
+    {
+        // read the string s.
+        string s = Console.ReadLine();
+
+        // create the Solution class object p.
+        //Solution obj = new Solution();
+        Palindrom obj = new Palindrom();
+
+        // push/enqueue all the characters of string s to stack.
+        foreach (char c in s)
+        {
+            obj.pushCharacter(c);
+            obj.enqueueCharacter(c);
+        }
+
+        bool isPalindrome = true;
+
+        // pop the top character from stack.
+        // dequeue the first character from queue.
+        // compare both the characters.
+        for (int i = 0; i < s.Length / 2; i++)
+        {
+            if (obj.popCharacter() != obj.dequeueCharacter())
+            {
+                isPalindrome = false;
+
+                break;
+            }
+        }
+
+        // finally print whether string s is palindrome or not.
+        if (isPalindrome)
+        {
+            Console.Write("The word, {0}, is a palindrome.", s);
+        }
+        else
+        {
+            Console.Write("The word, {0}, is not a palindrome.", s);
+        }
+    }
+
+}
