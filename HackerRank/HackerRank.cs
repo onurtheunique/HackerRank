@@ -47,10 +47,11 @@ class Solution
         //FindDigits.starter(args);
         //viralAdvertisingn.Starter(args);
         //BadString.Starter(args);
-       // SubarrayDivision.Starter(args);
+        //SubarrayDivision.Starter(args);
         //MoreExceptions.Starter(args);
-        Palindrom.Starter(args);
-
+        //Palindrom.Starter(args);
+        //Interfaces.Starter(args);
+        FunnyString.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1188,7 +1189,7 @@ class MoreExceptions
         }
     }
 }
-public class Palindrom
+class Palindrom
 {
     //Write your code here
     Stack<char> stack = new Stack<char>();
@@ -1257,4 +1258,69 @@ public class Palindrom
             Console.Write("The word, {0}, is not a palindrome.", s);
         }
     }
+}
+class Interfaces
+{
+    public interface AdvancedArithmetic
+    {
+        int divisorSum(int n);
+    }
+    public class Calculator : AdvancedArithmetic
+    {
+        public int divisorSum(int n)
+        {
+            int sum = 0;
+            for (int i=1; i<=n;i++)
+            {
+                if(n%i == 0) sum=sum+i;
+            }
+
+            return sum;
+        }
+    }
+    public static void Starter(string[] args)
+    {
+        int n = Int32.Parse(Console.ReadLine());
+        AdvancedArithmetic myCalculator = new Calculator();
+        int sum = myCalculator.divisorSum(n);
+        Console.WriteLine("I implemented: AdvancedArithmetic\n" + sum);
+    }
+}
+class FunnyString
+{
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int q = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int qItr = 0; qItr < q; qItr++)
+        {
+            string s = Console.ReadLine();
+
+            //string result = Result.funnyString(s);
+            string result = funnyString(s);
+            Console.WriteLine(result);
+        }
+
+    /*        textWriter.WriteLine(result);
+        }
+
+        textWriter.Flush();
+        textWriter.Close();
+    */
+    }
+
+    public static string funnyString(string s)
+    {
+        string result = "Funny";
+        char[] array=s.Reverse().ToArray();
+
+        int base = (int)Encoding.ASCII.GetBytes(array[0].ToStrin)
+
+        return result;
+
+
+    }
+
 }
