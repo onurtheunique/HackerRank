@@ -16,6 +16,7 @@ using System.ComponentModel.Design;
 using YamlDotNet.Serialization;
 using System.Reflection.Metadata.Ecma335;
 using static System.Formats.Asn1.AsnWriter;
+using System.Data;
 
 class Solution
 {
@@ -44,6 +45,9 @@ class Solution
         //LinkedList.starter(args);
         //Scope.starter(args);
         //FindDigits.starter(args);
+        //viralAdvertisingn.Starter(args);
+        //BadString.Starter(args);
+        //SubarrayDivision.Starter(args);
         //MoreExceptions.Starter(args);
         //Palindrom.Starter(args);
         //Interfaces.Starter(args);
@@ -1066,6 +1070,77 @@ class FindDigits
       // textWriter.Close();
     }
 }
+class viralAdvertisingn
+{
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        int result = viralAdvertising(n);
+        Console.Write(result);
+/*
+        textWriter.WriteLine(result);
+        textWriter.Flush();
+        textWriter.Close();
+*/
+    }
+    public static int viralAdvertising(int n)
+    {
+        double shared = 5.0;
+        double liked = 0;
+        int sum = 0;
+        for(int d = 1;d<=n;d++)
+        {
+            liked= double.Parse(Math.Floor(shared / 2).ToString());
+            sum=sum+int.Parse(liked.ToString());
+            shared = (liked * 3);
+        }
+        return sum;
+    }
+}
+class BadString
+{
+    public static void Starter(string[] args)
+    {
+        string S = Console.ReadLine();
+        try 
+        { Console.WriteLine(int.Parse(S)); } catch { Console.Write("Bad String"); }
+
+    }
+}
+class SubarrayDivision
+{
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> s = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(sTemp => Convert.ToInt32(sTemp)).ToList();
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+        int d = Convert.ToInt32(firstMultipleInput[0]);
+        int m = Convert.ToInt32(firstMultipleInput[1]);
+        int result = birthday(s, d, m);
+/*
+        textWriter.WriteLine(result);
+        textWriter.Flush();
+        textWriter.Close();
+*/
+    }
+    public static int birthday(List<int> s, int d, int m)
+    {
+        int ways = 0;
+        for (var i = 0; i < s.Count; i++)
+        {
+            var segmentToSum = s.Skip(i).Take(m);
+            var segmentSum = segmentToSum.Sum();
+
+            if (segmentSum == d)
+            {
+                ways++;
+            }
+        }
+        return ways;
+    }
+}
 class MoreExceptions
 {
     public static void Starter(String[] args)
@@ -1116,7 +1191,6 @@ class MoreExceptions
 }
 class Palindrom
 {
-
     //Write your code here
     Stack<char> stack = new Stack<char>();
      Queue quete=new Queue();
@@ -1184,7 +1258,6 @@ class Palindrom
             Console.Write("The word, {0}, is not a palindrome.", s);
         }
     }
-
 }
 class Interfaces
 {
