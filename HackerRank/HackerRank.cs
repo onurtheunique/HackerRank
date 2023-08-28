@@ -51,7 +51,8 @@ class Solution
         //MoreExceptions.Starter(args);
         //Palindrom.Starter(args);
         //Interfaces.Starter(args);
-        FunnyString.Starter(args);
+        //FunnyString.Starter(args);
+        Gemstones.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1314,13 +1315,83 @@ class FunnyString
     public static string funnyString(string s)
     {
         string result = "Funny";
-        char[] array=s.Reverse().ToArray();
+        char[] arrayr=s.Reverse().ToArray(); 
+        char[] arrays = s.ToArray();
 
-        int base = (int)Encoding.ASCII.GetBytes(array[0].ToStrin)
-
+     for (int i=1;i<arrays.Length;i++)
+        {
+            if (Math.Abs((int)arrays[i] - (int)arrays[i - 1]) != Math.Abs((int)arrayr[i] - (int)arrayr[i - 1]))
+            { result = "Not " + result; break; }
+        }
         return result;
-
-
     }
 
+}
+class Gemstones
+{
+    public static int gemstones(List<string> arr)
+    {
+        int result = 0;
+        string[] arrfiltered=Filter(arr);
+        for(int i=0;i<arrfiltered.Length;i++)
+        {
+            foreach(char c in arrfiltered[i].ToArray())
+            {
+                bool res = true;
+                for(int j=i+1;j<arrfiltered.Length;j++)
+                {
+                    if (!arrfiltered[j].Contains(c)) res= false;
+                }
+                result=res?result+1:result;
+            }
+        }
+
+        return result;
+    }
+
+    private static string[] Filter(List<string> arr)
+    {
+        string[] filtered = new string[arr.Count()];
+        foreach (string s in arr)
+        {
+            int i= 0;
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in s.ToArray())
+            {
+                if (!sb.ToString().Contains(c))
+                {
+                    sb.Append(c);
+                }
+            }
+           filtered[i]=sb.ToString();
+            i++;
+        }
+        return filtered;
+    }
+
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<string> arr = new List<string>();
+
+        for (int i = 0; i < n; i++)
+        {
+            string arrItem = Console.ReadLine();
+            arr.Add(arrItem);
+        }
+
+        int result = gemstones(arr);
+        /*
+        int result = Result.gemstones(arr);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+        */
+        Console.WriteLine(result);
+    }
 }
