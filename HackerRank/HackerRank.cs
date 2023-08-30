@@ -52,7 +52,8 @@ class Solution
         //Palindrom.Starter(args);
         //Interfaces.Starter(args);
         //FunnyString.Starter(args);
-        Gemstones.Starter(args);
+        //Gemstones.Starter(args);
+        Sorting.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1333,8 +1334,7 @@ class Gemstones
     {
         int result = 0;
         string[] arrfiltered=Filter(arr);
-        for(int i=0;i<arrfiltered.Length;i++)
-        {
+        int i=0;
             foreach(char c in arrfiltered[i].ToArray())
             {
                 bool res = true;
@@ -1344,17 +1344,15 @@ class Gemstones
                 }
                 result=res?result+1:result;
             }
-        }
-
         return result;
     }
 
     private static string[] Filter(List<string> arr)
     {
         string[] filtered = new string[arr.Count()];
+        int i = 0;
         foreach (string s in arr)
         {
-            int i= 0;
             StringBuilder sb = new StringBuilder();
             foreach (char c in s.ToArray())
             {
@@ -1394,4 +1392,38 @@ class Gemstones
         */
         Console.WriteLine(result);
     }
+}
+class Sorting
+{
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
+
+        swamper(a);
+        // Write your code here
+    }
+    private static void swamper(List<int> arr)
+    { 
+        int numberOfSwaps = 0;
+        for (int i = 0; i < arr.Count; i++)
+        {
+            int num = arr[i]; 
+            for (int j = i+1; j < arr.Count - 1; j++)
+            {
+                int temp = arr[j];
+                if (num> temp )
+                {
+                    arr[j] = num;
+                    arr[i] = temp;
+                    numberOfSwaps++;
+                }
+            }
+        }
+        Console.WriteLine($"Array is sorted in {numberOfSwaps} swaps.");
+        Console.WriteLine($"First Element: {arr[0]}");
+        Console.WriteLine($"Last Element: {arr[arr.Count - 1]}");
+    }
+
 }
