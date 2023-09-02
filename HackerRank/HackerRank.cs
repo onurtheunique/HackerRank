@@ -1444,7 +1444,23 @@ class CleanNodes
     }
     public static Node removeDuplicates(Node head)
     {
-        //Write your code here
+        Node node = head;
+        List<int> clearlist = new List<int>();
+        while(node!=null)
+        {
+            if(!clearlist.Contains(node.data))
+            {
+                clearlist.Add(node.data);
+            }
+            node = node.next;
+        }
+
+        Node basenode = null;
+        foreach (var i in clearlist)
+        {
+            basenode = insert(basenode, i);
+        }
+        return basenode;
     }
 
     public static Node insert(Node head, int data)
@@ -1475,7 +1491,7 @@ class CleanNodes
             start = start.next;
         }
     }
-    static void Starter(String[] args)
+    public static void Starter(String[] args)
     {
 
         Node head = null;
