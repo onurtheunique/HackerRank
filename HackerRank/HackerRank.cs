@@ -53,7 +53,8 @@ class Solution
         //Interfaces.Starter(args);
         //FunnyString.Starter(args);
         //Gemstones.Starter(args);
-        Sorting.Starter(args);
+        //Sorting.Starter(args);
+        CleanNodes.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1401,29 +1402,106 @@ class Sorting
 
         List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
 
-        swamper(a);
-        // Write your code here
-    }
-    private static void swamper(List<int> arr)
-    { 
-        int numberOfSwaps = 0;
-        for (int i = 0; i < arr.Count; i++)
+        int swaps = 0;
+
+        for (int i = 0; i < n; i++)
         {
-            int num = arr[i]; 
-            for (int j = i+1; j < arr.Count - 1; j++)
+            int swapsNumber = 0;
+
+            for (int j = 0; j < n - 1; j++)
             {
-                int temp = arr[j];
-                if (num> temp )
+                if (a[j] > a[j + 1])
                 {
-                    arr[j] = num;
-                    arr[i] = temp;
-                    numberOfSwaps++;
+                    int memory = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = memory;
+                    swapsNumber++;
+                    swaps++;
                 }
             }
+            if (swapsNumber == 0)
+                break;
         }
-        Console.WriteLine($"Array is sorted in {numberOfSwaps} swaps.");
-        Console.WriteLine($"First Element: {arr[0]}");
-        Console.WriteLine($"Last Element: {arr[arr.Count - 1]}");
+
+        Console.WriteLine($"Array is sorted in {swaps} swaps.");
+        Console.WriteLine($"First Element: {a[0]}");
+        Console.WriteLine($"Last Element: {a[a.Count - 1]}");
+    }
+}
+
+class CleanNodes
+{
+    public class Node
+    {
+        public int data;
+        public Node next;
+        public Node(int d)
+        {
+            data = d;
+            next = null;
+        }
+
+    }
+    public static Node removeDuplicates(Node head)
+    {
+        Node node = head;
+        List<int> clearlist = new List<int>();
+        while(node!=null)
+        {
+            if(!clearlist.Contains(node.data))
+            {
+                clearlist.Add(node.data);
+            }
+            node = node.next;
+        }
+
+        Node basenode = null;
+        foreach (var i in clearlist)
+        {
+            basenode = insert(basenode, i);
+        }
+        return basenode;
     }
 
+    public static Node insert(Node head, int data)
+    {
+        Node p = new Node(data);
+
+
+        if (head == null)
+            head = p;
+        else if (head.next == null)
+            head.next = p;
+        else
+        {
+            Node start = head;
+            while (start.next != null)
+                start = start.next;
+            start.next = p;
+
+        }
+        return head;
+    }
+    public static void display(Node head)
+    {
+        Node start = head;
+        while (start != null)
+        {
+            Console.Write(start.data + " ");
+            start = start.next;
+        }
+    }
+    public static void Starter(String[] args)
+    {
+
+        Node head = null;
+        int T = Int32.Parse(Console.ReadLine());
+        while (T-- > 0)
+        {
+            int data = Int32.Parse(Console.ReadLine());
+            head = insert(head, data);
+        }
+        head = removeDuplicates(head);
+        display(head);
+    }
 }
