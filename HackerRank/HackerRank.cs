@@ -1428,7 +1428,6 @@ class Sorting
         Console.WriteLine($"Last Element: {a[a.Count - 1]}");
     }
 }
-
 class CleanNodes
 {
     public class Node
