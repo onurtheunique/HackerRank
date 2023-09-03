@@ -54,7 +54,8 @@ class Solution
         //FunnyString.Starter(args);
         //Gemstones.Starter(args);
         //Sorting.Starter(args);
-        CleanNodes.Starter(args);
+        //CleanNodes.Starter(args);
+        IsPrimeOptimised.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1502,5 +1503,58 @@ class CleanNodes
         }
         head = removeDuplicates(head);
         display(head);
+    }
+}
+class IsPrimeOptimised
+{
+    public static void Starter(String[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> a = new List<int>();
+        for (int i=0; i<n; i++)
+        {
+            a.Add(int.Parse(Console.ReadLine().TrimEnd()));
+        }
+        foreach (int i in a)
+        {
+           if(IsPrime(i))
+            {
+                Console.WriteLine("Prime");
+            }
+           else
+            {
+                Console.WriteLine("Not prime");
+            }
+        }
+    }
+    static bool IsPrime(int num)
+    {
+        if (num == 1)
+        {
+            return false;
+        }
+
+        if (num % 2 == 0) // test edilecek değerlerin %50 si 2 çift sayı olacağından 2 ye bölünme testini eklemek işi hızlandıracaktır.
+        {
+            for (int n = 2; n < num; n += 2)
+            {
+                if (num % n == 0)
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            for (int n = 3; n < num; n += 2)
+            {
+                if (num % n == 0)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
