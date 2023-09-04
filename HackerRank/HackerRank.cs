@@ -55,7 +55,8 @@ class Solution
         //Gemstones.Starter(args);
         //Sorting.Starter(args);
         //CleanNodes.Starter(args);
-        IsPrimeOptimised.Starter(args);
+        //IsPrimeOptimised.Starter(args);
+        NestedLogic.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1556,5 +1557,33 @@ class IsPrimeOptimised
         }
 
         return true;
+    }
+}
+class NestedLogic
+{
+    public static void Starter(String[] args)
+    {
+        int[] returndatesections = Array.ConvertAll(Console.ReadLine().Split(' '), sections => Convert.ToInt32(sections));        
+        int[] expecreddatesections = Array.ConvertAll(Console.ReadLine().Split(' '), sections => Convert.ToInt32(sections));
+        DateTime returndate = new DateTime(day: returndatesections[0], month: returndatesections[1], year: returndatesections[2]);
+        DateTime expecreddate = new DateTime(day: expecreddatesections[0], month: expecreddatesections[1], year: expecreddatesections[2]);
+        int hectos = 0;
+        if (returndate > expecreddate)
+        {
+            if (returndate.Year == expecreddate.Year && returndate.Month == expecreddate.Month)
+            {
+                hectos = (returndate.Day - expecreddate.Day) * 15;
+            }
+            else if(returndate.Year == expecreddate.Year && returndate.Month > expecreddate.Month)
+            {
+                hectos = (returndate.Month - expecreddate.Month) * 500;
+            }else if(returndate.Year > expecreddate.Year)
+            {
+                hectos = 10000;
+            }
+
+           
+        } Console.WriteLine(hectos.ToString());
+ 
     }
 }
