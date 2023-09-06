@@ -54,7 +54,8 @@ class Solution
         //FunnyString.Starter(args);
         //Gemstones.Starter(args);
         //Sorting.Starter(args);
-        CleanNodes.Starter(args);
+        //CleanNodes.Starter(args);
+        Mailbook.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1428,7 +1429,6 @@ class Sorting
         Console.WriteLine($"Last Element: {a[a.Count - 1]}");
     }
 }
-
 class CleanNodes
 {
     public class Node
@@ -1504,4 +1504,42 @@ class CleanNodes
         head = removeDuplicates(head);
         display(head);
     }
+}
+class Mailbook
+{
+        private class book
+    {
+        public string name;
+        public string mail;
+            public book() { }
+            public book(string name, string mail) { this.name = name; this.mail = mail; }
+        public void printName() 
+            {
+                Console.WriteLine(name);
+            }
+    }
+    public static void Starter(string[] args)
+    {
+        int N = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<book> adresbook = new List<book>();
+
+        for (int NItr = 0; NItr < N; NItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            string firstName = firstMultipleInput[0];
+
+            string emailID = firstMultipleInput[1];
+
+            string mail = emailID.Split('@')[1].Split('.')[0];
+                if (string.Equals("gmail",mail) )
+                {
+                    adresbook.Add(new book(firstName, mail));
+                }
+
+            }
+            foreach (book book in adresbook.OrderBy(o => o.name)) 
+        { book.printName(); }
+        }
 }
