@@ -57,7 +57,8 @@ class Solution
         //CleanNodes.Starter(args);
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
-        BitWise.Starter(args);
+        //BitWise.Starter(args);
+        DivisibleSumPairs.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1587,7 +1588,6 @@ class NestedLogic
  
     }
 }
-
 class BitWise
 {
     public static int bitwiseAnd(int N, int K)
@@ -1630,5 +1630,40 @@ class BitWise
         textWriter.Flush();
         textWriter.Close();
 */
+    }
+}
+class DivisibleSumPairs
+{
+    public static int divisibleSumPairs(int n, int k, List<int> ar)
+    {
+        int count = 0;
+        int[] array = ar.ToArray();
+
+        for(int i=0;i<ar.Count-1;i++)
+        {
+            for(int j=1;j<ar.Count;j++)
+            {
+                if( i < j && (ar[i] + ar[j])%k==0)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static void Starter(string[] args)
+    {
+
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> ar = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arTemp => Convert.ToInt32(arTemp)).ToList();
+
+        int result = divisibleSumPairs(n, k, ar);
+
+        Console.WriteLine(result);
     }
 }
