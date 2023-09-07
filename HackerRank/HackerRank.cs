@@ -1508,7 +1508,6 @@ class CleanNodes
         display(head);
     }
 }
-
 class Mailbook
 {
         private class book
@@ -1628,7 +1627,6 @@ class NestedLogic
  
     }
 }
-
 class BitWise
 {
     public static int bitwiseAnd(int N, int K)
@@ -1646,12 +1644,9 @@ class BitWise
             }
         }
         return max;
-
     }
     public static void Starter(string[] args)
     {
-       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
-
         int t = Convert.ToInt32(Console.ReadLine().Trim());
 
         for (int tItr = 0; tItr < t; tItr++)
@@ -1665,11 +1660,7 @@ class BitWise
             int res =bitwiseAnd(count, lim);
             Console.WriteLine(res);
 
-            //textWriter.WriteLine(res);
         }
-/*
-        textWriter.Flush();
-        textWriter.Close();
-*/
+
     }
 }
