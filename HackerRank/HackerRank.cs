@@ -56,7 +56,8 @@ class Solution
         //Sorting.Starter(args);
         //CleanNodes.Starter(args);
         //IsPrimeOptimised.Starter(args);
-        NestedLogic.Starter(args);
+        //NestedLogic.Starter(args);
+        BitWise.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1040,7 +1041,6 @@ class LinkedList // Nextvall yeni bir nesne değil sadece pointer!!!!
 }
 class FindDigits
 {
-
     public static int findDigits(int n)
     {
             int result = 0;
@@ -1585,5 +1585,50 @@ class NestedLogic
            
         } Console.WriteLine(hectos.ToString());
  
+    }
+}
+
+class BitWise
+{
+    public static int bitwiseAnd(int N, int K)
+    {
+        int a;int b;
+        int max = 0;
+        for (a=1;a<=N-1;a++)
+        {
+             
+            for (b = 2; b <= N; b++)
+            {
+                if(a<b & (a&b)<K)
+                { max = (a & b) > max ? a & b : max;
+                }
+            }
+        }
+        return max;
+
+    }
+    public static void Starter(string[] args)
+    {
+       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int count = Convert.ToInt32(firstMultipleInput[0]);
+
+            int lim = Convert.ToInt32(firstMultipleInput[1]);
+
+            int res =bitwiseAnd(count, lim);
+            Console.WriteLine(res);
+
+            //textWriter.WriteLine(res);
+        }
+/*
+        textWriter.Flush();
+        textWriter.Close();
+*/
     }
 }
