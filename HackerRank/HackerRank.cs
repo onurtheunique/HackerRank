@@ -55,7 +55,8 @@ class Solution
         //Gemstones.Starter(args);
         //Sorting.Starter(args);
         //CleanNodes.Starter(args);
-        Mailbook.Starter(args);
+        //Mailbook.Starter(args);
+        MigratoryBirds.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1542,4 +1543,35 @@ class Mailbook
             foreach (book book in adresbook.OrderBy(o => o.name)) 
         { book.printName(); }
         }
+}
+class MigratoryBirds
+{
+
+    public static int migratoryBirds(List<int> arr)
+    {
+        int[] counts=new int[6];
+
+        for (int i = 1; i < 6; i++)
+        {
+            counts[i]=arr.Where(w=>w==i).Count();
+        }
+       return Array.FindIndex(counts, row => row == counts.Max());
+    }
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int arrCount = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        int result = migratoryBirds(arr);
+        Console.WriteLine(result);
+/*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+*/
+    }
 }
