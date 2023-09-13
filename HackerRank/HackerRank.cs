@@ -56,7 +56,9 @@ class Solution
         //Sorting.Starter(args);
         //CleanNodes.Starter(args);
         //Mailbook.Starter(args);
-        MigratoryBirds.Starter(args);
+        //MigratoryBirds.Starter(args);
+        //Socks.Starter(args);
+        BillDivision.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1573,5 +1575,66 @@ class MigratoryBirds
         textWriter.Flush();
         textWriter.Close();
 */
+    }
+}
+class Socks
+{
+
+    public static int sockMerchant(int n, List<int> ar)
+    {
+        int sum = 0;
+        foreach (int i in ar.Distinct())
+        {
+            int count = ar.Where(w => w == i).Count();
+
+            sum = count% 2 == 0 ? sum + (count / 2) : sum + ((count - 1) / 2);
+
+        }
+        return sum;
+    }
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> ar = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arTemp => Convert.ToInt32(arTemp)).ToList();
+
+        int result = sockMerchant(n, ar);
+
+       Console.WriteLine(result);
+    }
+}
+class BillDivision
+{
+    public static void bonAppetit(List<int> bill, int k, int b)
+    {
+        int[] arrbill=bill.ToArray();
+        int sum=0;
+        for (int i = 0; i < arrbill.Length; i++) 
+        { 
+          if(i!=k)  sum += arrbill[i]; 
+        }
+        if(sum/2==b)
+        {
+            Console.WriteLine("Bon Appetit");
+        }
+        else
+        {
+            Console.WriteLine(Math.Abs(b - (sum / 2)));
+        }
+    }
+
+    public static void Starter(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> bill = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(billTemp => Convert.ToInt32(billTemp)).ToList();
+
+        int b = Convert.ToInt32(Console.ReadLine().Trim());
+
+        bonAppetit(bill, k, b);
     }
 }
