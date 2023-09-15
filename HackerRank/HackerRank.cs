@@ -58,7 +58,8 @@ class Solution
         //Mailbook.Starter(args);
         //MigratoryBirds.Starter(args);
         //Socks.Starter(args);
-        BillDivision.Starter(args);
+        //BillDivision.Starter(args);
+        DrawingBook.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1637,4 +1638,47 @@ class BillDivision
 
         bonAppetit(bill, k, b);
     }
+}
+class DrawingBook
+{
+    public static void Starter(string[] args)
+    {
+       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int p = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int result = pageCount(n, p);
+
+        Console.WriteLine(result);
+ /*       textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+ */
+    }
+    public static int pageCount(int n, int p)
+    {
+        List<int> book = printBook(n);
+
+        int front = book.FindIndex(f => f == p || f == p + 1);
+        int back = book.Count()-1 - front;
+        if (front < back) return front;
+        return back;
+    }
+    private static List<int> printBook(int n)
+    {      
+        List<int> book = new List<int>();
+        int page = 1;
+        book.Add(page);
+        while (page < n)
+        {
+            page = page + 2;
+            book.Add(page);
+        }
+        return book;
+    }
+
+
 }
