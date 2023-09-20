@@ -59,7 +59,8 @@ class Solution
         //MigratoryBirds.Starter(args);
         //Socks.Starter(args);
         //BillDivision.Starter(args);
-        DrawingBook.Starter(args);
+        //DrawingBook.Starter(args);
+        CountingValleys.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1681,4 +1682,47 @@ class DrawingBook
     }
 
 
+}
+class CountingValleys
+{
+
+
+    public static int countingValleys(int steps, string path)
+    {
+        char[] csteps = path.ToArray();
+        int terrain=0;
+        int count = 0;   
+        for (int i = 0; i < steps; i++)
+        {         
+               switch (csteps[i])
+                {
+                    case 'U':
+                        terrain++;
+                        break;
+                    case 'D':
+                    if (terrain == 0 ) count++;
+                        terrain--;
+                        break;
+                }
+        }
+        return count;
+    }
+
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int steps = Convert.ToInt32(Console.ReadLine().Trim());
+
+        string path = Console.ReadLine();
+
+        int result = countingValleys(steps, path);
+        /*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+        */
+        Console.WriteLine(result);
+    }
 }
