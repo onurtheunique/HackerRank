@@ -58,7 +58,8 @@ class Solution
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
         //BitWise.Starter(args);
-        DivisibleSumPairs.Starter(args);
+        //DivisibleSumPairs.Starter(args);
+        SaveThePrisoner.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1667,3 +1668,39 @@ class DivisibleSumPairs
         Console.WriteLine(result);
     }
 }
+class SaveThePrisoner
+{
+    public static int saveThePrisoner(int n, int m, int s)
+    {
+        return (s - 1 + m - 1) % n + 1;
+    }
+
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int n = Convert.ToInt32(firstMultipleInput[0]);
+
+            int m = Convert.ToInt32(firstMultipleInput[1]);
+
+            int s = Convert.ToInt32(firstMultipleInput[2]);
+
+            int result = saveThePrisoner(n, m, s);
+            /*
+                        textWriter.WriteLine(result);
+                    }
+
+                    textWriter.Flush();
+                    textWriter.Close();
+            */
+            Console.WriteLine(result);
+        }
+    }
+}
+
