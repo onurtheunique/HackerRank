@@ -61,7 +61,10 @@ class Solution
         //BillDivision.Starter(args);
         //DrawingBook.Starter(args);
         //CountingValleys.Starter(args);
-        //LisasWorkbook.Starter(args);
+        //IsPrimeOptimised.Starter(args);
+        //NestedLogic.Starter(args);
+        //BitWise.Starter(args);
+ 				//LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
         CutTheSticks.Starter(args);
         Console.ReadLine();
@@ -1047,7 +1050,6 @@ class LinkedList // Nextvall yeni bir nesne değil sadece pointer!!!!
 }
 class FindDigits
 {
-
     public static int findDigits(int n)
     {
             int result = 0;
@@ -1844,6 +1846,122 @@ class CutTheSticks
         List<int> result = cutTheSticks(arr);
 
         Console.WriteLine(String.Join("\n", result));
+
+class IsPrimeOptimised
+{
+    public static void Starter(String[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> a = new List<int>();
+        for (int i=0; i<n; i++)
+        {
+            a.Add(int.Parse(Console.ReadLine().TrimEnd()));
+        }
+        foreach (int i in a)
+        {
+           if(IsPrime(i))
+            {
+                Console.WriteLine("Prime");
+            }
+           else
+            {
+                Console.WriteLine("Not prime");
+            }
+        }
+    }
+    static bool IsPrime(int num)
+    {
+        if (num == 1)
+        {
+            return false;
+        }
+
+        if (num % 2 == 0) // test edilecek değerlerin %50 si 2 çift sayı olacağından 2 ye bölünme testini eklemek işi hızlandıracaktır.
+        {
+            for (int n = 2; n < num; n += 2)
+            {
+                if (num % n == 0)
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            for (int n = 3; n < num; n += 2)
+            {
+                if (num % n == 0)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
+class NestedLogic
+{
+    public static void Starter(String[] args)
+    {
+        int[] returndatesections = Array.ConvertAll(Console.ReadLine().Split(' '), sections => Convert.ToInt32(sections));        
+        int[] expecreddatesections = Array.ConvertAll(Console.ReadLine().Split(' '), sections => Convert.ToInt32(sections));
+        DateTime returndate = new DateTime(day: returndatesections[0], month: returndatesections[1], year: returndatesections[2]);
+        DateTime expecreddate = new DateTime(day: expecreddatesections[0], month: expecreddatesections[1], year: expecreddatesections[2]);
+        int hectos = 0;
+        if (returndate > expecreddate)
+        {
+            if (returndate.Year == expecreddate.Year && returndate.Month == expecreddate.Month)
+            {
+                hectos = (returndate.Day - expecreddate.Day) * 15;
+            }
+            else if(returndate.Year == expecreddate.Year && returndate.Month > expecreddate.Month)
+            {
+                hectos = (returndate.Month - expecreddate.Month) * 500;
+            }else if(returndate.Year > expecreddate.Year)
+            {
+                hectos = 10000;
+            }
+
+           
+        } Console.WriteLine(hectos.ToString());
+ 
+    }
+}
+class BitWise
+{
+    public static int bitwiseAnd(int N, int K)
+    {
+        int a;int b;
+        int max = 0;
+        for (a=1;a<=N-1;a++)
+        {
+             
+            for (b = 2; b <= N; b++)
+            {
+                if(a<b & (a&b)<K)
+                { max = (a & b) > max ? a & b : max;
+                }
+            }
+        }
+        return max;
+    }
+    public static void Starter(string[] args)
+    {
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int count = Convert.ToInt32(firstMultipleInput[0]);
+
+            int lim = Convert.ToInt32(firstMultipleInput[1]);
+
+            int res =bitwiseAnd(count, lim);
+            Console.WriteLine(res);
+
+        }
 
     }
 }
