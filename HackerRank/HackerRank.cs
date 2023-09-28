@@ -64,7 +64,7 @@ class Solution
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
         //BitWise.Starter(args);
- 				//LisasWorkbook.Starter(args);
+ 	    //LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
         CutTheSticks.Starter(args);
         Console.ReadLine();
@@ -1729,124 +1729,6 @@ class CountingValleys
         Console.WriteLine(result);
     }
 }
-class LisasWorkbook
-{
-    public static int workbook(int n, int k, List<int> arr)
-    {
-        List<int[]> pages = new List<int[]>();
-        List<int[]> chapters = new List<int[]>();
-        int hits = 0;
-        foreach (int i in arr)
-        {
-            List<int> problems = new List<int>();
-            for (int p = 1; p <= i; p++)
-            {
-                problems.Add(p);
-            }
-            chapters.Add(problems.ToArray());
-        }
-        foreach (int[] i in chapters)
-        {
-            int counter = 0;
-            List<int> page = new List<int>();
-            for (int r = 0; r < i.Length; r++)
-            {
-                if (counter == k)
-                {
-                    pages.Add(page.ToArray());
-                    counter = 0;
-                    page.Clear();
-                }
-                page.Add(i[r]);
-                counter++;
-                if (r == i.Length - 1) pages.Add(page.ToArray());
-            }
-
-        }
-        for (int i = 0; i < pages.Count(); i++)
-        {
-            if (pages[i].Contains(i + 1)) hits++;
-        }
-
-        return hits;
-    }
-
-
-
-    public static void Starter(string[] args)
-    {
-        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
-
-        int n = Convert.ToInt32(firstMultipleInput[0]);
-
-        int k = Convert.ToInt32(firstMultipleInput[1]);
-
-        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
-
-        int result = workbook(n, k, arr);
-        Console.WriteLine(result);
-
-    }
-}
-class PickingNumbers
-{
-    public static int pickingNumbers(List<int> a)
-    {
-        int max = 0;
-        a = a.OrderBy(i => i).ToList();
-        foreach (int i in a)
-        {
-            int count = a.Where(w => w == i || w == i + 1).Count();
-            max = count > max ? count : max;
-        }
-        return max;
-    }
-
-    public static void Starter(string[] args)
-    {
-
-        int n = Convert.ToInt32(Console.ReadLine().Trim());
-
-        List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
-
-        int result = pickingNumbers(a);
-
-        Console.WriteLine(result);
-    }
-}
-class CutTheSticks
-{
-    private static List<int> cutTheSticks(List<int> arr)
-    {
-        int[] ar = arr.ToArray();
-        List<int> result = new List<int>();
-        while (ar.Max() > 0)
-        {
-            int min = ar.Where(w => w > 0).Min();
-            int hit = 0;
-            for (int i = 0; i < arr.Count(); i++)
-            {
-                if (ar[i] >= min)
-                {
-                    ar[i] = ar[i] - min;
-                    hit++;
-                }
-            }
-            result.Add(hit);
-        }
-        return result;
-    }
-    public static void Starter(string[] args)
-    {
-
-        int n = Convert.ToInt32(Console.ReadLine().Trim());
-
-        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
-
-        List<int> result = cutTheSticks(arr);
-
-        Console.WriteLine(String.Join("\n", result));
-
 class IsPrimeOptimised
 {
     public static void Starter(String[] args)
@@ -1963,5 +1845,120 @@ class BitWise
 
         }
 
+    }
+}
+class LisasWorkbook
+{
+    public static int workbook(int n, int k, List<int> arr)
+    {
+        List<int[]> pages = new List<int[]>();
+        List<int[]> chapters = new List<int[]>();
+        int hits = 0;
+        foreach (int i in arr)
+        {
+            List<int> problems = new List<int>();
+            for (int p = 1; p <= i; p++)
+            {
+                problems.Add(p);
+            }
+            chapters.Add(problems.ToArray());
+        }
+        foreach (int[] i in chapters)
+        {
+            int counter = 0;
+            List<int> page = new List<int>();
+            for (int r = 0; r < i.Length; r++)
+            {
+                if (counter == k)
+                {
+                    pages.Add(page.ToArray());
+                    counter = 0;
+                    page.Clear();
+                }
+                page.Add(i[r]);
+                counter++;
+                if (r == i.Length - 1) pages.Add(page.ToArray());
+            }
+
+        }
+        for (int i = 0; i < pages.Count(); i++)
+        {
+            if (pages[i].Contains(i + 1)) hits++;
+        }
+        return hits;
+    }
+    public static void Starter(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        int result = workbook(n, k, arr);
+        Console.WriteLine(result);
+
+    }
+}
+class PickingNumbers
+{
+    public static int pickingNumbers(List<int> a)
+    {
+        int max = 0;
+        a = a.OrderBy(i => i).ToList();
+        foreach (int i in a)
+        {
+            int count = a.Where(w => w == i || w == i + 1).Count();
+            max = count > max ? count : max;
+        }
+        return max;
+    }
+
+    public static void Starter(string[] args)
+    {
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
+
+        int result = pickingNumbers(a);
+
+        Console.WriteLine(result);
+    }
+}
+class CutTheSticks
+{
+    private static List<int> cutTheSticks(List<int> arr)
+    {
+        int[] ar = arr.ToArray();
+        List<int> result = new List<int>();
+        while (ar.Max() > 0)
+        {
+            int min = ar.Where(w => w > 0).Min();
+            int hit = 0;
+            for (int i = 0; i < arr.Count(); i++)
+            {
+                if (ar[i] >= min)
+                {
+                    ar[i] = ar[i] - min;
+                    hit++;
+                }
+            }
+            result.Add(hit);
+        }
+        return result;
+    }
+    public static void Starter(string[] args)
+    {
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        List<int> result = cutTheSticks(arr);
+
+        Console.WriteLine(String.Join("\n", result));
     }
 }
