@@ -1,21 +1,4 @@
-﻿using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using System.Text;
-using System;
-using YamlDotNet.Core;
-using System.ComponentModel.Design;
-using YamlDotNet.Serialization;
-using System.Reflection.Metadata.Ecma335;
-using static System.Formats.Asn1.AsnWriter;
+﻿using System.Collections;
 using System.Data;
 
 class Solution
