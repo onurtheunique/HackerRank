@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Data;
+using System.Text;
 
 class Solution
 {
@@ -49,7 +50,8 @@ class Solution
         //BitWise.Starter(args);
  	    //LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
-        CutTheSticks.Starter(args);
+        //CutTheSticks.Starter(args);
+        JumpingOnTheCloudsRevisited.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1943,5 +1945,44 @@ class CutTheSticks
         List<int> result = cutTheSticks(arr);
 
         Console.WriteLine(String.Join("\n", result));
+    }
+}
+class JumpingOnTheCloudsRevisited
+{
+    private class refac
+    {
+        int val { get; set; }
+        int loc { get; set; }
+        refac(int val,int loc)
+        {
+            this.val = val;
+            this.loc = loc;
+        }
+    }
+    private static int jumpingOnClouds(int[] c, int k)
+    {
+        int sum = 0;
+        int i = 0;
+        bool p = true;
+        while (i!=0 || p)
+        {
+            p = false;
+            i = (i + k) % c.Count();
+            sum = c[i] == 0 ? sum = sum + 1 : sum = sum + 3;
+        }
+        return 100-sum;
+    }
+    public static void Starter(string[] args)
+    {
+        string[] nk = Console.ReadLine().Split(' ');
+
+        int n = Convert.ToInt32(nk[0]);
+
+        int k = Convert.ToInt32(nk[1]);
+
+        int[] c = Array.ConvertAll(Console.ReadLine().Split(' '), cTemp => Convert.ToInt32(cTemp))
+        ;
+        int result = jumpingOnClouds(c, k);
+        Console.WriteLine(result);
     }
 }
