@@ -51,7 +51,8 @@ class Solution
  	    //LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
         //CutTheSticks.Starter(args);
-        JumpingOnTheCloudsRevisited.Starter(args);
+        //JumpingOnTheCloudsRevisited.Starter(args);
+        AppendandDelete.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1984,5 +1985,43 @@ class JumpingOnTheCloudsRevisited
         ;
         int result = jumpingOnClouds(c, k);
         Console.WriteLine(result);
+    }
+}
+class AppendandDelete
+{
+    private static string appendAndDelete(string s, string t, int k)
+    {
+        int endofsim = 0;
+        string sl= s.Length < t.Length ? s : t;
+        for (int i = 0;i<sl.Length;i++) 
+        {
+            if (s[i] != t[i])
+            {
+                break;
+            }
+            endofsim = i + 1;
+        }
+        string res = "No";
+        int sCount = s.Length - endofsim;
+        int tCount = t.Length - endofsim;
+        int totalOps = sCount + tCount;
+
+        if (k >= totalOps && (k - totalOps) % 2 == 0)
+        {
+            res= "Yes";
+        }
+
+        return res;
+    }
+    public static void Starter(string[] args)
+    {
+        string s = Console.ReadLine();
+
+        string t = Console.ReadLine();
+
+        int k = Convert.ToInt32(Console.ReadLine().Trim());
+
+        string result = appendAndDelete(s, t, k);
+        Console.WriteLine(result);   
     }
 }
