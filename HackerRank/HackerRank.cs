@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Data;
+using System.Reflection.PortableExecutable;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 
 class Solution
@@ -48,11 +50,13 @@ class Solution
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
         //BitWise.Starter(args);
- 	    //LisasWorkbook.Starter(args);
+        //LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
         //CutTheSticks.Starter(args);
         //JumpingOnTheCloudsRevisited.Starter(args);
-        AppendandDelete.Starter(args);
+        //AppendandDelete.Starter(args);
+        //GameofThronesI.Starter(args);
+        FormingaMagicSquare.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2023,5 +2027,88 @@ class AppendandDelete
 
         string result = appendAndDelete(s, t, k);
         Console.WriteLine(result);   
+    }
+}
+class GameofThronesI
+{
+    public static void Starter(string[] args)
+    {
+        string s = Console.ReadLine();
+        string result = gameOfThrones(s);
+        Console.WriteLine(result);
+    }
+    private static string gameOfThrones(string s)
+    {
+        List<char> list = s.ToArray().Distinct().ToList();
+        int counter = 0;
+        foreach (char c in list) 
+        {
+            if (s.Where(x => x == c).Count() % 2 != 0) counter++;
+        }
+        if ((counter == 1 && s.Length % 2 == 1) || (counter == 0 && s.Length % 2 == 0))
+        {
+            return "YES";
+        }
+        else
+        {
+            return "NO";
+        }
+        }
+}
+
+class FormingaMagicSquare
+{
+    public static void Starter(string[] args)
+    {
+        List<List<int>> s = new List<List<int>>();
+
+        for (int i = 0; i < 3; i++)
+        {
+            s.Add(Console.ReadLine().TrimEnd().Split(' ').ToList().Select(sTemp => Convert.ToInt32(sTemp)).ToList());
+        }
+
+        int result = formingMagicSquare(s);
+
+        Console.WriteLine(result);
+
+    }
+    private static int formingMagicSquare(List<List<int>> s)
+    {
+        int result = 0;
+        int[,] matris = MatrisMaker(s);
+        List<int> maxsum = MatrisColumnSum(matris);
+
+        foreach (List<int> list in s)
+        {
+            maxsum.Add(list.Sum());
+        }
+        maxsum = maxsum.Distinct().OrderByDescending(x => x).ToList();
+        return result;
+    }
+
+    private static List<int> MatrisColumnSum(int[,] matris)
+    {
+        List<int> maxsum = new List<int>();
+
+        for (int x = 0; x < 3; x++)
+        {
+            maxsum.Add(matris[0, x] + matris[1, x] + matris[2, x]);
+        }
+        return maxsum;
+    }
+
+    private static int[,] MatrisMaker(List<List<int>> s)
+    {
+        int[,] matris = new int[3, 3];
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                matris[x, y] = s.ToArray()[y].ToArray()[x];
+            }
+            int sum = s.ToList()[x].Sum();
+        }
+
+        return matris;
     }
 }
