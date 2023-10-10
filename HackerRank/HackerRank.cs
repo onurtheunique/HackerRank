@@ -56,6 +56,7 @@ class Solution
         //JumpingOnTheCloudsRevisited.Starter(args);
         //AppendandDelete.Starter(args);
         //GameofThronesI.Starter(args);
+        //TimeInWords.Starter(args);
         FormingaMagicSquare.Starter(args);
         Console.ReadLine();
     }
@@ -2055,7 +2056,28 @@ class GameofThronesI
         }
         }
 }
+class TimeInWords
+{
+    public static void Starter(string[] args)
+    {
+        int h = Convert.ToInt32(Console.ReadLine().Trim());
+        int m = Convert.ToInt32(Console.ReadLine().Trim());
+        string result = timeInWords(h, m);
+        Console.WriteLine(result);
+    }
+    private static string timeInWords(int h, int m)
+    {
+        String[] timeText = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty one", "twenty two", "twenty three", "twenty four", "twenty five", "twenty six", "twenty seven", "twenty eight", "twenty nine" };
 
+        if (m == 0) return timeText[h - 1] + " o' clock";
+        if (m == 1) return "one minute past " + timeText[h - 1];
+        if (m == 15) return "quarter past " + timeText[h - 1];
+        if (m == 45) return "quarter to " + timeText[h];
+        if (m == 30) return "half past " + timeText[h - 1];
+        if (m > 30) return timeText[60 - m - 1] + " minutes to " + timeText[h];
+        return timeText[m - 1] + " minutes past " + timeText[h - 1];
+    }
+}
 class FormingaMagicSquare
 {
     public static void Starter(string[] args)
