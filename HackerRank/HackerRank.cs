@@ -57,7 +57,9 @@ class Solution
         //AppendandDelete.Starter(args);
         //GameofThronesI.Starter(args);
         //TimeInWords.Starter(args);
-        FormingaMagicSquare.Starter(args);
+        //FormingaMagicSquare.Starter(args);
+        //ChocolateFeast.Starter(args);
+        ACMICPCTeam.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2133,4 +2135,141 @@ class FormingaMagicSquare
 
         return matris;
     }
+}
+class ChocolateFeast
+{
+
+    public static void Starter(string[] args)
+    {
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+            int n = Convert.ToInt32(firstMultipleInput[0]);
+            int c = Convert.ToInt32(firstMultipleInput[1]);
+            int m = Convert.ToInt32(firstMultipleInput[2]);
+            int result = chocolateFeast(n, c, m);
+            Console.WriteLine(result);
+        }
+    }
+    public static int chocolateFeast(int n, int c, int m)
+    {
+        int choco = 0;
+        int wraps = 0;
+
+        while (n >= c) 
+        {
+            choco++;
+            wraps++;
+            n = n - c;
+        }
+        while (wraps>=m)
+        {
+            choco++;
+            wraps++;
+            wraps=wraps - m;
+        }
+
+
+        return choco;
+    }
+}
+class ACMICPCTeam
+{
+    public static void Starter(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+        int m = Convert.ToInt32(firstMultipleInput[1]);
+        List<string> topic = new List<string>();
+
+        for (int i = 0; i < n; i++)
+        {
+            string topicItem = Console.ReadLine();
+            topic.Add(topicItem);
+        }
+        List<int> result = acmTeam(topic);
+        Console.WriteLine(String.Join("\n", result));
+    }
+    #region mycode
+    /*
+    public static List<int> acmTeam(List<string> topic)
+    {
+        List<int> result = new List<int>();
+        List<int> tops = new List<int>();
+        string[] topics = topic.ToArray();
+        int max = int.MinValue;
+        for (int i = 0; i < topics.Length; i++)
+        {
+            for( int j = i+1; j < topics.Length;j++)
+            {
+                int sum = Calculator(topics, i, j);
+                if (sum >= max)
+                {
+                    max = sum;
+                    tops.Add(sum);
+                }
+            }
+        }
+      result.Add(max); result.Add(tops.Where(w=>w==max).Count());
+        return result;
+    }
+
+    private static int Calculator(string[] topics, int i, int j)
+    {
+        int sum = 0;
+        for (int x = 0; x < topics[i].Length; x++)
+        {
+            int sit = int.Parse(topics[i].ToCharArray()[x].ToString()) + int.Parse(topics[j].ToCharArray()[x].ToString());
+            sum = sit > 0 ? sum = sum + 1 : sum;
+        }
+        return sum;
+    }
+    */
+    #endregion
+    public static List<int> acmTeam(List<string> topic)
+    {
+        List<int> result = new List<int>();
+        int maxTopics = 0;
+        int maxTeams = 0;
+
+        for (int i = 0; i < topic.Count - 1; i++)
+        {
+            for (int j = i + 1; j < topic.Count; j++)
+            {
+                int sum = Calculator(topic[i], topic[j]);
+
+                if (sum > maxTopics)
+                {
+                    maxTopics = sum;
+                    maxTeams = 1;
+                }
+                else if (sum == maxTopics)
+                {
+                    maxTeams++;
+                }
+            }
+        }
+
+        result.Add(maxTopics);
+        result.Add(maxTeams);
+
+        return result;
+    }
+
+    private static int Calculator(string a, string b)
+    {
+        int sum = 0;
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] == '1' || b[i] == '1')
+            {
+                sum++;
+            }
+        }
+
+        return sum;
+    }
+
 }
