@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Microsoft.VisualBasic;
+using System.Collections;
 using System.Data;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization.Formatters;
@@ -60,7 +61,8 @@ class Solution
         //FormingaMagicSquare.Starter(args);
         //ChocolateFeast.Starter(args);
         //ACMICPCTeam.Starter(args);
-        TaumandBday.Starter(args);
+        //TaumandBday.Starter(args);
+        ModifiedKaprekarNumbers.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2312,5 +2314,62 @@ class TaumandBday
         long allw = ((lb+lw)*lwc) + (lb*lz);
         long allb = ((lb+lw)*lbc) + (lw*lz);
         return Math.Min(basecost,Math.Min(allw,allb));  
+    }
+}
+class ModifiedKaprekarNumbers
+{
+    public static void Starter(string[] args)
+    {
+        int p = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int q = Convert.ToInt32(Console.ReadLine().Trim());
+
+        kaprekarNumbers(p, q);
+    }
+    public static void kaprekarNumbers(int p, int q)
+    {
+        List<int> baselist=ListCraeator(p, q);
+        List<string> Result=new List<string>();
+        foreach (int r in baselist) 
+        {
+            if(split(r))
+            {
+                Result.Add(r.ToString());
+            }
+        }
+        if (Result.Count ==0) { Console.WriteLine("INVALID RANGE"); }
+        Console.WriteLine(string.Join(" ", Result));
+    }
+    private static bool split(long r)
+    {
+        if (r == 1) return true;
+        string val = (r * r).ToString();
+        int cnt = val.Length;
+        if (cnt < 2) return false;
+        int fh = 0;
+        int sh=0;
+        if (cnt % 2 == 0 && cnt>1)
+        {
+            fh = int.Parse(val.Substring(0, cnt/2).ToString());
+            sh = int.Parse(val.Substring(cnt/2).ToString());
+        }
+        else
+        {
+            fh = int.Parse(val.Substring(0, (cnt-1)/2).ToString());
+            sh = int.Parse(val.Substring((cnt-1)/2).ToString());
+        }
+        
+        if (r == (fh + sh)) return true;  
+        return false;
+    }
+
+    private static List<int> ListCraeator(int p, int q)
+    {
+        List<int> list = new List<int>();
+        for (int i = p; i <=q; i++)
+        {
+            list.Add(i);
+        }
+        return list;
     }
 }
