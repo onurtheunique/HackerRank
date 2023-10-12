@@ -59,7 +59,8 @@ class Solution
         //TimeInWords.Starter(args);
         //FormingaMagicSquare.Starter(args);
         //ChocolateFeast.Starter(args);
-        ACMICPCTeam.Starter(args);
+        //ACMICPCTeam.Starter(args);
+        TaumandBday.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2272,4 +2273,44 @@ class ACMICPCTeam
         return sum;
     }
 
+}
+class TaumandBday
+{
+    public static void Starter(string[] args)
+    {
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int b = Convert.ToInt32(firstMultipleInput[0]);
+
+            int w = Convert.ToInt32(firstMultipleInput[1]);
+
+            string[] secondMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int bc = Convert.ToInt32(secondMultipleInput[0]);
+
+            int wc = Convert.ToInt32(secondMultipleInput[1]);
+
+            int z = Convert.ToInt32(secondMultipleInput[2]);
+
+            long result =taumBday(b, w, bc, wc, z);
+
+            Console.WriteLine(result);
+        }
+    }
+    private static long taumBday(int b, int w, int bc, int wc, int z)
+    {
+        long lb=long.Parse(b.ToString());
+        long lw=long.Parse(w.ToString());
+        long lbc=long.Parse(bc.ToString());
+        long lwc=long.Parse(wc.ToString());
+        long lz=long.Parse(z.ToString());
+        long basecost=(lb*lbc)+(lw*lwc);
+        long allw = ((lb+lw)*lwc) + (lb*lz);
+        long allb = ((lb+lw)*lbc) + (lw*lz);
+        return Math.Min(basecost,Math.Min(allw,allb));  
+    }
 }
