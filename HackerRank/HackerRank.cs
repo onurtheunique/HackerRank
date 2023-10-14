@@ -62,7 +62,9 @@ class Solution
         //ChocolateFeast.Starter(args);
         //ACMICPCTeam.Starter(args);
         //TaumandBday.Starter(args);
-        ModifiedKaprekarNumbers.Starter(args);
+        // ModifiedKaprekarNumbers.Starter(args);
+        //IntrotoTutorialChallenges.Starter(args);
+        CaesarCipher.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2371,5 +2373,113 @@ class ModifiedKaprekarNumbers
             list.Add(i);
         }
         return list;
+    }
+}
+class IntrotoTutorialChallenges
+{
+    public static void Starter(string[] args)
+    {
+        int V = Convert.ToInt32(Console.ReadLine().Trim());
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+        int result = introTutorial(V, arr);
+        Console.WriteLine(result);
+    }
+    private static int introTutorial(int V, List<int> arr)
+    {
+        for (int i = 0; i < arr.Count; i++)
+        {
+            if (arr.ToArray()[i] == V)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+}
+class CaesarCipher
+{
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        string s = Console.ReadLine();
+        int k = Convert.ToInt32(Console.ReadLine().Trim());
+        string result =caesarCipher(s, k);
+        Console.WriteLine(result);
+    }
+
+    private static string caesarCipher(string s, int k)
+    {
+        string alphabet = "abcdefghijklmnopqrstuvwxyz";
+        char[] calphabet = alphabet.ToCharArray();
+        k = k % calphabet.Length;
+        char[] crotated = AlphabetBuilder(k, alphabet);
+        char[] crypted = new char[s.Length];
+        for (int i = 0; i < s.Length; i++)
+        {
+            char c = s.ToCharArray()[i];
+            bool upper = false;
+            if (Char.IsUpper(c))
+            {
+                c=Char.ToLower(c);
+                upper = true;
+            }
+            if (calphabet.Contains(c))
+            {
+                int num = Array.IndexOf(calphabet, c);
+                crypted[i] = crotated[num];
+                if (upper) crypted[i] = Char.ToUpper(crypted[i]);
+            }
+            else
+            {
+                crypted[i] = s.ToCharArray()[i];
+            }
+        }
+        
+        return ArrayToString(crypted);
+    }
+
+    private static string ArrayToString(char[] crypted)
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (char c in crypted)
+        {
+            sb.Append(c);
+        }
+       return sb.ToString();
+    }
+
+    private static char[] AlphabetBuilder(int k,string alph)
+    {
+        string dualalphabet = alph + alph;
+        char[] rotatedalphabet = new char[alph.Length];
+        for (int i = 0; i < alph.Length; i++)
+        {
+            rotatedalphabet[i] = dualalphabet.ToCharArray()[i + k];
+        }
+        return rotatedalphabet;
+    }
+}
+class InsertionSortPart1
+{
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        insertionSort1(n, arr);
+    }
+
+    private static void insertionSort1(int n, List<int> arr)
+    {
+        int[] carr = arr.ToArray();
+        int max = arr.Max();
+        int sort = carr[arr.Count() - 1];
+        bool unsorted = true;
+        while (unsorted)
+        {
+
+        }
     }
 }
