@@ -64,7 +64,8 @@ class Solution
         //TaumandBday.Starter(args);
         // ModifiedKaprekarNumbers.Starter(args);
         //IntrotoTutorialChallenges.Starter(args);
-        CaesarCipher.Starter(args);
+        //CaesarCipher.Starter(args);
+        InsertionSortPart1.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2473,13 +2474,22 @@ class InsertionSortPart1
 
     private static void insertionSort1(int n, List<int> arr)
     {
-        int[] carr = arr.ToArray();
-        int max = arr.Max();
-        int sort = carr[arr.Count() - 1];
-        bool unsorted = true;
-        while (unsorted)
-        {
-
-        }
+        int sort = arr[arr.Count() - 1];
+        arr[arr.Count() - 1] =arr[arr.Count()-2];   
+            for (int i=arr.Count-1; i >0 ;i--) 
+            {
+                    if (arr[i-1]<sort)
+                {
+                    arr[i] = sort;
+                    Console.WriteLine(String.Join(' ', arr));
+                    break;
+                }
+                arr[i] = arr[i - 1];
+            Console.WriteLine(String.Join(' ',arr));             
+            }
+        
     }
+
+    
+
 }
