@@ -65,7 +65,8 @@ class Solution
         // ModifiedKaprekarNumbers.Starter(args);
         //IntrotoTutorialChallenges.Starter(args);
         //CaesarCipher.Starter(args);
-        InsertionSortPart1.Starter(args);
+        //InsertionSortPart1.Starter(args);
+        SherlockandSquares.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2491,5 +2492,30 @@ class InsertionSortPart1
     }
 
     
+
+}
+class SherlockandSquares
+{
+    public static void Starter(string[] args)
+    {
+        int q = Convert.ToInt32(Console.ReadLine().Trim());
+        for (int qItr = 0; qItr < q; qItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+            int a = Convert.ToInt32(firstMultipleInput[0]);
+            int b = Convert.ToInt32(firstMultipleInput[1]);
+            int result = squares(a, b);
+            Console.WriteLine(result);
+        }
+    }
+    private static int squares(int a, int b)
+    {
+        int count = 0;
+        for(int i = a; i <= b;i++)
+        {
+            if (Math.Sqrt(i) % 1 == 0) count++;
+        }
+        return count;
+    }
 
 }
