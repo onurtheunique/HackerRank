@@ -1,21 +1,4 @@
-﻿using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using System.Text;
-using System;
-using YamlDotNet.Core;
-using System.ComponentModel.Design;
-using YamlDotNet.Serialization;
-using System.Reflection.Metadata.Ecma335;
-using static System.Formats.Asn1.AsnWriter;
+﻿using System.Collections;
 using System.Data;
 
 class Solution
@@ -55,9 +38,18 @@ class Solution
         //Gemstones.Starter(args);
         //Sorting.Starter(args);
         //CleanNodes.Starter(args);
+        //Mailbook.Starter(args);
+        //MigratoryBirds.Starter(args);
+        //Socks.Starter(args);
+        //BillDivision.Starter(args);
+        //DrawingBook.Starter(args);
+        //CountingValleys.Starter(args);
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
         //BitWise.Starter(args);
+ 	      //LisasWorkbook.Starter(args);
+        //PickingNumbers.Starter(args);
+        //CutTheSticks.Starter(args);
         //DivisibleSumPairs.Starter(args);
         SaveThePrisoner.Starter(args);
         Console.ReadLine();
@@ -1508,6 +1500,220 @@ class CleanNodes
         display(head);
     }
 }
+class Mailbook
+{
+        private class book
+    {
+        public string name;
+        public string mail;
+            public book() { }
+            public book(string name, string mail) { this.name = name; this.mail = mail; }
+        public void printName() 
+            {
+                Console.WriteLine(name);
+            }
+    }
+    public static void Starter(string[] args)
+    {
+        int N = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<book> adresbook = new List<book>();
+
+        for (int NItr = 0; NItr < N; NItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            string firstName = firstMultipleInput[0];
+
+            string emailID = firstMultipleInput[1];
+
+            string mail = emailID.Split('@')[1].Split('.')[0];
+                if (string.Equals("gmail",mail) )
+                {
+                    adresbook.Add(new book(firstName, mail));
+                }
+
+            }
+            foreach (book book in adresbook.OrderBy(o => o.name)) 
+        { book.printName(); }
+        }
+}
+class MigratoryBirds
+{
+
+    public static int migratoryBirds(List<int> arr)
+    {
+        int[] counts=new int[6];
+
+        for (int i = 1; i < 6; i++)
+        {
+            counts[i]=arr.Where(w=>w==i).Count();
+        }
+       return Array.FindIndex(counts, row => row == counts.Max());
+    }
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int arrCount = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        int result = migratoryBirds(arr);
+        Console.WriteLine(result);
+/*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+*/
+    }
+}
+class Socks
+{
+
+    public static int sockMerchant(int n, List<int> ar)
+    {
+        int sum = 0;
+        foreach (int i in ar.Distinct())
+        {
+            int count = ar.Where(w => w == i).Count();
+
+            sum = count% 2 == 0 ? sum + (count / 2) : sum + ((count - 1) / 2);
+
+        }
+        return sum;
+    }
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> ar = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arTemp => Convert.ToInt32(arTemp)).ToList();
+
+        int result = sockMerchant(n, ar);
+
+       Console.WriteLine(result);
+    }
+}
+class BillDivision
+{
+    public static void bonAppetit(List<int> bill, int k, int b)
+    {
+        int[] arrbill=bill.ToArray();
+        int sum=0;
+        for (int i = 0; i < arrbill.Length; i++) 
+        { 
+          if(i!=k)  sum += arrbill[i]; 
+        }
+        if(sum/2==b)
+        {
+            Console.WriteLine("Bon Appetit");
+        }
+        else
+        {
+            Console.WriteLine(Math.Abs(b - (sum / 2)));
+        }
+    }
+
+    public static void Starter(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> bill = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(billTemp => Convert.ToInt32(billTemp)).ToList();
+
+        int b = Convert.ToInt32(Console.ReadLine().Trim());
+
+        bonAppetit(bill, k, b);
+    }
+}
+class DrawingBook
+{
+    public static void Starter(string[] args)
+    {
+       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int p = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int result = pageCount(n, p);
+
+        Console.WriteLine(result);
+ /*       textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+ */
+    }
+    public static int pageCount(int n, int p)
+    {
+        List<int> book = printBook(n);
+
+        int front = book.FindIndex(f => f == p || f == p + 1);
+        int back = book.Count()-1 - front;
+        if (front < back) return front;
+        return back;
+    }
+    private static List<int> printBook(int n)
+    {      
+        List<int> book = new List<int>();
+        int page = 1;
+        book.Add(page);
+        while (page < n)
+        {
+            page = page + 2;
+            book.Add(page);
+        }
+        return book;
+    }
+
+
+}
+class CountingValleys
+{
+    public static int countingValleys(int steps, string path)
+    {
+        char[] csteps = path.ToArray();
+        int terrain=0;
+        int count = 0;   
+        for (int i = 0; i < steps; i++)
+        {         
+               switch (csteps[i])
+                {
+                    case 'U':
+                        terrain++;
+                        break;
+                    case 'D':
+                    if (terrain == 0 ) count++;
+                        terrain--;
+                        break;
+                }
+        }
+        return count;
+    }
+
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int steps = Convert.ToInt32(Console.ReadLine().Trim());
+
+        string path = Console.ReadLine();
+
+        int result = countingValleys(steps, path);
+        /*
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+        */
+        Console.WriteLine(result);
+    }
+}
 class IsPrimeOptimised
 {
     public static void Starter(String[] args)
@@ -1606,12 +1812,9 @@ class BitWise
             }
         }
         return max;
-
     }
     public static void Starter(string[] args)
     {
-       // TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
-
         int t = Convert.ToInt32(Console.ReadLine().Trim());
 
         for (int tItr = 0; tItr < t; tItr++)
@@ -1625,12 +1828,123 @@ class BitWise
             int res =bitwiseAnd(count, lim);
             Console.WriteLine(res);
 
-            //textWriter.WriteLine(res);
         }
-/*
-        textWriter.Flush();
-        textWriter.Close();
-*/
+
+    }
+}
+class LisasWorkbook
+{
+    public static int workbook(int n, int k, List<int> arr)
+    {
+        List<int[]> pages = new List<int[]>();
+        List<int[]> chapters = new List<int[]>();
+        int hits = 0;
+        foreach (int i in arr)
+        {
+            List<int> problems = new List<int>();
+            for (int p = 1; p <= i; p++)
+            {
+                problems.Add(p);
+            }
+            chapters.Add(problems.ToArray());
+        }
+        foreach (int[] i in chapters)
+        {
+            int counter = 0;
+            List<int> page = new List<int>();
+            for (int r = 0; r < i.Length; r++)
+            {
+                if (counter == k)
+                {
+                    pages.Add(page.ToArray());
+                    counter = 0;
+                    page.Clear();
+                }
+                page.Add(i[r]);
+                counter++;
+                if (r == i.Length - 1) pages.Add(page.ToArray());
+            }
+
+        }
+        for (int i = 0; i < pages.Count(); i++)
+        {
+            if (pages[i].Contains(i + 1)) hits++;
+        }
+        return hits;
+    }
+    public static void Starter(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        int result = workbook(n, k, arr);
+        Console.WriteLine(result);
+
+    }
+}
+class PickingNumbers
+{
+    public static int pickingNumbers(List<int> a)
+    {
+        int max = 0;
+        a = a.OrderBy(i => i).ToList();
+        foreach (int i in a)
+        {
+            int count = a.Where(w => w == i || w == i + 1).Count();
+            max = count > max ? count : max;
+        }
+        return max;
+    }
+
+    public static void Starter(string[] args)
+    {
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
+
+        int result = pickingNumbers(a);
+
+        Console.WriteLine(result);
+    }
+}
+class CutTheSticks
+{
+    private static List<int> cutTheSticks(List<int> arr)
+    {
+        int[] ar = arr.ToArray();
+        List<int> result = new List<int>();
+        while (ar.Max() > 0)
+        {
+            int min = ar.Where(w => w > 0).Min();
+            int hit = 0;
+            for (int i = 0; i < arr.Count(); i++)
+            {
+                if (ar[i] >= min)
+                {
+                    ar[i] = ar[i] - min;
+                    hit++;
+                }
+            }
+            result.Add(hit);
+        }
+        return result;
+    }
+    public static void Starter(string[] args)
+    {
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        List<int> result = cutTheSticks(arr);
+
+        Console.WriteLine(String.Join("\n", result));
     }
 }
 class DivisibleSumPairs
