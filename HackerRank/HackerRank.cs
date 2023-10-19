@@ -1,5 +1,9 @@
-﻿using System.Collections;
+﻿using Microsoft.VisualBasic;
+using System.Collections;
 using System.Data;
+using System.Reflection.PortableExecutable;
+using System.Runtime.Serialization.Formatters;
+using System.Text;
 
 class Solution
 {
@@ -51,7 +55,23 @@ class Solution
         //PickingNumbers.Starter(args);
         //CutTheSticks.Starter(args);
         //DivisibleSumPairs.Starter(args);
-        SaveThePrisoner.Starter(args);
+        //SaveThePrisoner.Starter(args);
+        //LisasWorkbook.Starter(args);
+        //PickingNumbers.Starter(args);
+        //CutTheSticks.Starter(args);
+        //JumpingOnTheCloudsRevisited.Starter(args);
+        //AppendandDelete.Starter(args);
+        //GameofThronesI.Starter(args);
+        //TimeInWords.Starter(args);
+        //FormingaMagicSquare.Starter(args);
+        //ChocolateFeast.Starter(args);
+        //ACMICPCTeam.Starter(args);
+        //TaumandBday.Starter(args);
+        // ModifiedKaprekarNumbers.Starter(args);
+        //IntrotoTutorialChallenges.Starter(args);
+        //CaesarCipher.Starter(args);
+        //InsertionSortPart1.Starter(args);
+        SherlockandSquares.Starter(args);
         Console.ReadLine();
     }
 }
@@ -1993,11 +2013,334 @@ class SaveThePrisoner
     {
         //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
+class JumpingOnTheCloudsRevisited
+{
+    private class refac
+    {
+        int val { get; set; }
+        int loc { get; set; }
+        refac(int val,int loc)
+        {
+            this.val = val;
+            this.loc = loc;
+        }
+    }
+    private static int jumpingOnClouds(int[] c, int k)
+    {
+        int sum = 0;
+        int i = 0;
+        bool p = true;
+        while (i!=0 || p)
+        {
+            p = false;
+            i = (i + k) % c.Count();
+            sum = c[i] == 0 ? sum = sum + 1 : sum = sum + 3;
+        }
+        return 100-sum;
+    }
+    public static void Starter(string[] args)
+    {
+        string[] nk = Console.ReadLine().Split(' ');
+
+        int n = Convert.ToInt32(nk[0]);
+
+        int k = Convert.ToInt32(nk[1]);
+
+        int[] c = Array.ConvertAll(Console.ReadLine().Split(' '), cTemp => Convert.ToInt32(cTemp))
+        ;
+        int result = jumpingOnClouds(c, k);
+        Console.WriteLine(result);
+    }
+}
+class AppendandDelete
+{
+    private static string appendAndDelete(string s, string t, int k)
+    {
+        int endofsim = 0;
+        string sl= s.Length < t.Length ? s : t;
+        for (int i = 0;i<sl.Length;i++) 
+        {
+            if (s[i] != t[i])
+            {
+                break;
+            }
+            endofsim = i + 1;
+        }
+        string res = "No";
+        int sCount = s.Length - endofsim;
+        int tCount = t.Length - endofsim;
+        int totalOps = sCount + tCount;
+
+        if (k >= totalOps && (k - totalOps) % 2 == 0)
+        {
+            res= "Yes";
+        }
+
+        return res;
+    }
+    public static void Starter(string[] args)
+    {
+        string s = Console.ReadLine();
+
+        string t = Console.ReadLine();
+
+        int k = Convert.ToInt32(Console.ReadLine().Trim());
+
+        string result = appendAndDelete(s, t, k);
+        Console.WriteLine(result);   
+    }
+}
+class GameofThronesI
+{
+    public static void Starter(string[] args)
+    {
+        string s = Console.ReadLine();
+        string result = gameOfThrones(s);
+        Console.WriteLine(result);
+    }
+    private static string gameOfThrones(string s)
+    {
+        List<char> list = s.ToArray().Distinct().ToList();
+        int counter = 0;
+        foreach (char c in list) 
+        {
+            if (s.Where(x => x == c).Count() % 2 != 0) counter++;
+        }
+        if ((counter == 1 && s.Length % 2 == 1) || (counter == 0 && s.Length % 2 == 0))
+        {
+            return "YES";
+        }
+        else
+        {
+            return "NO";
+        }
+        }
+}
+class TimeInWords
+{
+    public static void Starter(string[] args)
+    {
+        int h = Convert.ToInt32(Console.ReadLine().Trim());
+        int m = Convert.ToInt32(Console.ReadLine().Trim());
+        string result = timeInWords(h, m);
+        Console.WriteLine(result);
+    }
+    private static string timeInWords(int h, int m)
+    {
+        String[] timeText = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty one", "twenty two", "twenty three", "twenty four", "twenty five", "twenty six", "twenty seven", "twenty eight", "twenty nine" };
+
+        if (m == 0) return timeText[h - 1] + " o' clock";
+        if (m == 1) return "one minute past " + timeText[h - 1];
+        if (m == 15) return "quarter past " + timeText[h - 1];
+        if (m == 45) return "quarter to " + timeText[h];
+        if (m == 30) return "half past " + timeText[h - 1];
+        if (m > 30) return timeText[60 - m - 1] + " minutes to " + timeText[h];
+        return timeText[m - 1] + " minutes past " + timeText[h - 1];
+    }
+}
+class FormingaMagicSquare
+{
+    public static void Starter(string[] args)
+    {
+        List<List<int>> s = new List<List<int>>();
+
+        for (int i = 0; i < 3; i++)
+        {
+            s.Add(Console.ReadLine().TrimEnd().Split(' ').ToList().Select(sTemp => Convert.ToInt32(sTemp)).ToList());
+        }
+
+        int result = formingMagicSquare(s);
+
+        Console.WriteLine(result);
+
+    }
+    private static int formingMagicSquare(List<List<int>> s)
+    {
+        int result = 0;
+        int[,] matris = MatrisMaker(s);
+        List<int> maxsum = MatrisColumnSum(matris);
+
+        foreach (List<int> list in s)
+        {
+            maxsum.Add(list.Sum());
+        }
+        maxsum = maxsum.Distinct().OrderByDescending(x => x).ToList();
+        return result;
+    }
+
+    private static List<int> MatrisColumnSum(int[,] matris)
+    {
+        List<int> maxsum = new List<int>();
+
+        for (int x = 0; x < 3; x++)
+        {
+            maxsum.Add(matris[0, x] + matris[1, x] + matris[2, x]);
+        }
+        return maxsum;
+    }
+
+    private static int[,] MatrisMaker(List<List<int>> s)
+    {
+        int[,] matris = new int[3, 3];
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                matris[x, y] = s.ToArray()[y].ToArray()[x];
+            }
+            int sum = s.ToList()[x].Sum();
+        }
+
+        return matris;
+    }
+}
+class ChocolateFeast
+{
+
+    public static void Starter(string[] args)
+    {
+        int t = Convert.ToInt32(Console.ReadLine().Trim());
+        for (int tItr = 0; tItr < t; tItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+            int n = Convert.ToInt32(firstMultipleInput[0]);
+            int c = Convert.ToInt32(firstMultipleInput[1]);
+            int m = Convert.ToInt32(firstMultipleInput[2]);
+            int result = chocolateFeast(n, c, m);
+            Console.WriteLine(result);
+        }
+    }
+    public static int chocolateFeast(int n, int c, int m)
+    {
+        int choco = 0;
+        int wraps = 0;
+
+        while (n >= c) 
+        {
+            choco++;
+            wraps++;
+            n = n - c;
+        }
+        while (wraps>=m)
+        {
+            choco++;
+            wraps++;
+            wraps=wraps - m;
+        }
+
+
+        return choco;
+    }
+}
+class ACMICPCTeam
+{
+    public static void Starter(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+        int m = Convert.ToInt32(firstMultipleInput[1]);
+        List<string> topic = new List<string>();
+
+        for (int i = 0; i < n; i++)
+        {
+            string topicItem = Console.ReadLine();
+            topic.Add(topicItem);
+        }
+        List<int> result = acmTeam(topic);
+        Console.WriteLine(String.Join("\n", result));
+    }
+    #region mycode
+    /*
+    public static List<int> acmTeam(List<string> topic)
+    {
+        List<int> result = new List<int>();
+        List<int> tops = new List<int>();
+        string[] topics = topic.ToArray();
+        int max = int.MinValue;
+        for (int i = 0; i < topics.Length; i++)
+        {
+            for( int j = i+1; j < topics.Length;j++)
+            {
+                int sum = Calculator(topics, i, j);
+                if (sum >= max)
+                {
+                    max = sum;
+                    tops.Add(sum);
+                }
+            }
+        }
+      result.Add(max); result.Add(tops.Where(w=>w==max).Count());
+        return result;
+    }
+
+    private static int Calculator(string[] topics, int i, int j)
+    {
+        int sum = 0;
+        for (int x = 0; x < topics[i].Length; x++)
+        {
+            int sit = int.Parse(topics[i].ToCharArray()[x].ToString()) + int.Parse(topics[j].ToCharArray()[x].ToString());
+            sum = sit > 0 ? sum = sum + 1 : sum;
+        }
+        return sum;
+    }
+    */
+    #endregion
+    public static List<int> acmTeam(List<string> topic)
+    {
+        List<int> result = new List<int>();
+        int maxTopics = 0;
+        int maxTeams = 0;
+
+        for (int i = 0; i < topic.Count - 1; i++)
+        {
+            for (int j = i + 1; j < topic.Count; j++)
+            {
+                int sum = Calculator(topic[i], topic[j]);
+
+                if (sum > maxTopics)
+                {
+                    maxTopics = sum;
+                    maxTeams = 1;
+                }
+                else if (sum == maxTopics)
+                {
+                    maxTeams++;
+                }
+            }
+        }
+
+        result.Add(maxTopics);
+        result.Add(maxTeams);
+
+        return result;
+    }
+
+    private static int Calculator(string a, string b)
+    {
+        int sum = 0;
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] == '1' || b[i] == '1')
+            {
+                sum++;
+            }
+        }
+
+        return sum;
+    }
+
+}
+class TaumandBday
+{
+    public static void Starter(string[] args)
+    {
         int t = Convert.ToInt32(Console.ReadLine().Trim());
 
         for (int tItr = 0; tItr < t; tItr++)
         {
             string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
 
             int n = Convert.ToInt32(firstMultipleInput[0]);
 
@@ -2018,3 +2361,232 @@ class SaveThePrisoner
     }
 }
 
+            int b = Convert.ToInt32(firstMultipleInput[0]);
+
+            int w = Convert.ToInt32(firstMultipleInput[1]);
+
+            string[] secondMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+            int bc = Convert.ToInt32(secondMultipleInput[0]);
+
+            int wc = Convert.ToInt32(secondMultipleInput[1]);
+
+            int z = Convert.ToInt32(secondMultipleInput[2]);
+
+            long result =taumBday(b, w, bc, wc, z);
+
+            Console.WriteLine(result);
+        }
+    }
+    private static long taumBday(int b, int w, int bc, int wc, int z)
+    {
+        long lb=long.Parse(b.ToString());
+        long lw=long.Parse(w.ToString());
+        long lbc=long.Parse(bc.ToString());
+        long lwc=long.Parse(wc.ToString());
+        long lz=long.Parse(z.ToString());
+        long basecost=(lb*lbc)+(lw*lwc);
+        long allw = ((lb+lw)*lwc) + (lb*lz);
+        long allb = ((lb+lw)*lbc) + (lw*lz);
+        return Math.Min(basecost,Math.Min(allw,allb));  
+    }
+}
+class ModifiedKaprekarNumbers
+{
+    public static void Starter(string[] args)
+    {
+        int p = Convert.ToInt32(Console.ReadLine().Trim());
+
+        int q = Convert.ToInt32(Console.ReadLine().Trim());
+
+        kaprekarNumbers(p, q);
+    }
+    public static void kaprekarNumbers(int p, int q)
+    {
+        List<int> baselist=ListCraeator(p, q);
+        List<string> Result=new List<string>();
+        foreach (int r in baselist) 
+        {
+            if(split(r))
+            {
+                Result.Add(r.ToString());
+            }
+        }
+        if (Result.Count ==0) { Console.WriteLine("INVALID RANGE"); }
+        Console.WriteLine(string.Join(" ", Result));
+    }
+    private static bool split(long r)
+    {
+        if (r == 1) return true;
+        string val = (r * r).ToString();
+        int cnt = val.Length;
+        if (cnt < 2) return false;
+        int fh = 0;
+        int sh=0;
+        if (cnt % 2 == 0 && cnt>1)
+        {
+            fh = int.Parse(val.Substring(0, cnt/2).ToString());
+            sh = int.Parse(val.Substring(cnt/2).ToString());
+        }
+        else
+        {
+            fh = int.Parse(val.Substring(0, (cnt-1)/2).ToString());
+            sh = int.Parse(val.Substring((cnt-1)/2).ToString());
+        }
+        
+        if (r == (fh + sh)) return true;  
+        return false;
+    }
+
+    private static List<int> ListCraeator(int p, int q)
+    {
+        List<int> list = new List<int>();
+        for (int i = p; i <=q; i++)
+        {
+            list.Add(i);
+        }
+        return list;
+    }
+}
+class IntrotoTutorialChallenges
+{
+    public static void Starter(string[] args)
+    {
+        int V = Convert.ToInt32(Console.ReadLine().Trim());
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+        int result = introTutorial(V, arr);
+        Console.WriteLine(result);
+    }
+    private static int introTutorial(int V, List<int> arr)
+    {
+        for (int i = 0; i < arr.Count; i++)
+        {
+            if (arr.ToArray()[i] == V)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+}
+class CaesarCipher
+{
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        string s = Console.ReadLine();
+        int k = Convert.ToInt32(Console.ReadLine().Trim());
+        string result =caesarCipher(s, k);
+        Console.WriteLine(result);
+    }
+
+    private static string caesarCipher(string s, int k)
+    {
+        string alphabet = "abcdefghijklmnopqrstuvwxyz";
+        char[] calphabet = alphabet.ToCharArray();
+        k = k % calphabet.Length;
+        char[] crotated = AlphabetBuilder(k, alphabet);
+        char[] crypted = new char[s.Length];
+        for (int i = 0; i < s.Length; i++)
+        {
+            char c = s.ToCharArray()[i];
+            bool upper = false;
+            if (Char.IsUpper(c))
+            {
+                c=Char.ToLower(c);
+                upper = true;
+            }
+            if (calphabet.Contains(c))
+            {
+                int num = Array.IndexOf(calphabet, c);
+                crypted[i] = crotated[num];
+                if (upper) crypted[i] = Char.ToUpper(crypted[i]);
+            }
+            else
+            {
+                crypted[i] = s.ToCharArray()[i];
+            }
+        }
+        
+        return ArrayToString(crypted);
+    }
+
+    private static string ArrayToString(char[] crypted)
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (char c in crypted)
+        {
+            sb.Append(c);
+        }
+       return sb.ToString();
+    }
+
+    private static char[] AlphabetBuilder(int k,string alph)
+    {
+        string dualalphabet = alph + alph;
+        char[] rotatedalphabet = new char[alph.Length];
+        for (int i = 0; i < alph.Length; i++)
+        {
+            rotatedalphabet[i] = dualalphabet.ToCharArray()[i + k];
+        }
+        return rotatedalphabet;
+    }
+}
+class InsertionSortPart1
+{
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        insertionSort1(n, arr);
+    }
+
+    private static void insertionSort1(int n, List<int> arr)
+    {
+        int sort = arr[arr.Count() - 1];
+        arr[arr.Count() - 1] =arr[arr.Count()-2];   
+            for (int i=arr.Count-1; i >0 ;i--) 
+            {
+                    if (arr[i-1]<sort)
+                {
+                    arr[i] = sort;
+                    Console.WriteLine(String.Join(' ', arr));
+                    break;
+                }
+                arr[i] = arr[i - 1];
+            Console.WriteLine(String.Join(' ',arr));             
+            }
+        
+    }
+
+    
+
+}
+class SherlockandSquares
+{
+    public static void Starter(string[] args)
+    {
+        int q = Convert.ToInt32(Console.ReadLine().Trim());
+        for (int qItr = 0; qItr < q; qItr++)
+        {
+            string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+            int a = Convert.ToInt32(firstMultipleInput[0]);
+            int b = Convert.ToInt32(firstMultipleInput[1]);
+            int result = squares(a, b);
+            Console.WriteLine(result);
+        }
+    }
+    private static int squares(int a, int b)
+    {
+        int count = 0;
+        for(int i = a; i <= b;i++)
+        {
+            if (Math.Sqrt(i) % 1 == 0) count++;
+        }
+        return count;
+    }
+
+}
