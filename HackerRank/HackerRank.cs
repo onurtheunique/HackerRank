@@ -51,6 +51,11 @@ class Solution
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
         //BitWise.Starter(args);
+ 	      //LisasWorkbook.Starter(args);
+        //PickingNumbers.Starter(args);
+        //CutTheSticks.Starter(args);
+        //DivisibleSumPairs.Starter(args);
+        //SaveThePrisoner.Starter(args);
         //LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
         //CutTheSticks.Starter(args);
@@ -1962,6 +1967,52 @@ class CutTheSticks
         Console.WriteLine(String.Join("\n", result));
     }
 }
+class DivisibleSumPairs
+{
+    public static int divisibleSumPairs(int n, int k, List<int> ar)
+    {
+        int count = 0;
+        int[] array = ar.ToArray();
+
+        for(int i=0;i<ar.Count-1;i++)
+        {
+            for(int j=1;j<ar.Count;j++)
+            {
+                if( i < j && (ar[i] + ar[j])%k==0)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static void Starter(string[] args)
+    {
+
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> ar = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arTemp => Convert.ToInt32(arTemp)).ToList();
+
+        int result = divisibleSumPairs(n, k, ar);
+
+        Console.WriteLine(result);
+    }
+}
+class SaveThePrisoner
+{
+    public static int saveThePrisoner(int n, int m, int s)
+    {
+        return (s - 1 + m - 1) % n + 1;
+    }
+
+    public static void Starter(string[] args)
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
 class JumpingOnTheCloudsRevisited
 {
     private class refac
@@ -2289,6 +2340,26 @@ class TaumandBday
         for (int tItr = 0; tItr < t; tItr++)
         {
             string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+
+            int n = Convert.ToInt32(firstMultipleInput[0]);
+
+            int m = Convert.ToInt32(firstMultipleInput[1]);
+
+            int s = Convert.ToInt32(firstMultipleInput[2]);
+
+            int result = saveThePrisoner(n, m, s);
+            /*
+                        textWriter.WriteLine(result);
+                    }
+
+                    textWriter.Flush();
+                    textWriter.Close();
+            */
+            Console.WriteLine(result);
+        }
+    }
+}
 
             int b = Convert.ToInt32(firstMultipleInput[0]);
 
