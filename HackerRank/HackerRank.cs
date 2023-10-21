@@ -51,7 +51,7 @@ class Solution
         //IsPrimeOptimised.Starter(args);
         //NestedLogic.Starter(args);
         //BitWise.Starter(args);
- 	    //LisasWorkbook.Starter(args);
+        //LisasWorkbook.Starter(args);
         //PickingNumbers.Starter(args);
         //CutTheSticks.Starter(args);
         //DivisibleSumPairs.Starter(args);
@@ -71,7 +71,8 @@ class Solution
         //IntrotoTutorialChallenges.Starter(args);
         //CaesarCipher.Starter(args);
         //InsertionSortPart1.Starter(args);
-        SherlockandSquares.Starter(args);
+        //SherlockandSquares.Starter(args);
+        ClimbingtheLeaderboard.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2584,4 +2585,49 @@ class SherlockandSquares
         return count;
     }
 
+}
+class ClimbingtheLeaderboard
+{
+    public static void Starter(string[] args)
+    { 
+        int rankedCount = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> ranked = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(rankedTemp => Convert.ToInt32(rankedTemp)).ToList();
+        int playerCount = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> player = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(playerTemp => Convert.ToInt32(playerTemp)).ToList();
+        List<int> result = climbingLeaderboard(ranked, player);
+        Console.WriteLine(String.Join("\n", result));
+    }
+
+    public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    {
+        List<int> result = new List<int>();
+        List<int> Distinted = ranked.Distinct().ToList();
+        foreach (int i in player)
+        {
+            if (i < ranked.Min())
+            {
+                result.Add(Distinted.Count() + 1);
+            }
+            else if (i >= ranked.Max())
+            {
+                result.Add(1);
+            }
+            else
+            {
+                foreach (int j in ranked)
+                {
+
+
+                    if (i >= j)
+                    {
+                        result.Add(ranked.Distinct().ToList().IndexOf(j) + 1);
+                        break;
+                    }
+
+                }
+            }
+        }
+
+        return result;
+    }
 }
