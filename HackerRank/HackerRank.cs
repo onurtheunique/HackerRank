@@ -2274,7 +2274,7 @@ class ACMICPCTeam
         List<int> result = acmTeam(topic);
         Console.WriteLine(String.Join("\n", result));
     }
-    #region mycode
+#region mycode
     /*
     public static List<int> acmTeam(List<string> topic)
     {
@@ -2309,7 +2309,7 @@ class ACMICPCTeam
         return sum;
     }
     */
-    #endregion
+#endregion
     public static List<int> acmTeam(List<string> topic)
     {
         List<int> result = new List<int>();
@@ -2589,16 +2589,36 @@ class SherlockandSquares
 class ClimbingtheLeaderboard
 {
     public static void Starter(string[] args)
-    { 
+    {
+        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
         int rankedCount = Convert.ToInt32(Console.ReadLine().Trim());
         List<int> ranked = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(rankedTemp => Convert.ToInt32(rankedTemp)).ToList();
         int playerCount = Convert.ToInt32(Console.ReadLine().Trim());
         List<int> player = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(playerTemp => Convert.ToInt32(playerTemp)).ToList();
         List<int> result = climbingLeaderboard(ranked, player);
+        //textWriter.WriteLine(String.Join("\n", result));
         Console.WriteLine(String.Join("\n", result));
     }
+    #region version_1
+    /*
+    private static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    {
+        List<int> result = new List<int>();
+        foreach (int i in player)
+        {
+            List<int> templist = ranked;
+            if (!templist.Contains(i))templist.Add(i);
+            List<int> neworder=templist.Distinct().OrderByDescending(o=>o).ToList();
+            result.Add(neworder.FindIndex(f => f == i) + 1);
+        }
+        return result;  
+    }
+    */
+    #endregion
 
-    public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    #region version_2
+    /*
+    private static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
     {
         List<int> result = new List<int>();
         List<int> Distinted = ranked.Distinct().ToList();
@@ -2629,5 +2649,72 @@ class ClimbingtheLeaderboard
         }
 
         return result;
+    }
+    */
+    #endregion
+    #region Tüfeng
+    /*
+    public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    {
+        List<int> result = new List<int>();
+
+        foreach (int i in player)
+        {
+            if (!ranked.Contains(i)) ranked.Add(i);
+            result.Add(ranked.Distinct().OrderByDescending(o => o).ToList().FindIndex(f => f == i) + 1);
+        }
+
+        return result;
+    }
+    */
+
+    #endregion
+    private static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    {
+        int rank = 1;
+        int j = 0;
+        bool JMoved = false;
+        int score = 0;
+        for (int i = player.Count - 1; i >= 0; i--)
+        {
+
+            if (player[i] == score)
+            {
+                player[i] = player[i + 1];
+                continue;
+            }
+            score = player[i];
+            while (j < ranked.Count)
+            {
+                int rankedScore = ranked[j];
+
+                if (j != 0 && rankedScore < ranked[j - 1] && JMoved) rank++;
+
+                if (score > rankedScore)
+                {
+                    if (j != 0 && score == ranked[j - 1] && JMoved) player[i] = rank - 1;
+                    else player[i] = rank;
+                    JMoved = false;
+                    break;
+                }
+
+                j++;
+                JMoved = true;
+            }
+            if (j >= ranked.Count)
+            {
+                if (player[i] == ranked[ranked.Count - 1])
+                {
+                    player[i] = rank;
+                }
+                else
+                {
+                    player[i] = rank + 1;
+                }
+
+            }
+
+        }
+        return player;
     }
 }
