@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections;
 using System.Data;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 
@@ -72,7 +74,8 @@ class Solution
         //CaesarCipher.Starter(args);
         //InsertionSortPart1.Starter(args);
         //SherlockandSquares.Starter(args);
-        ClimbingtheLeaderboard.Starter(args);
+        //ClimbingtheLeaderboard.Starter(args);
+        RepeatedString.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2630,4 +2633,41 @@ class ClimbingtheLeaderboard
 
         return result;
     }
+}
+class RepeatedString
+{
+    public static void Starter(string[] args)
+    {
+        string s = Console.ReadLine();
+        long n = Convert.ToInt64(Console.ReadLine().Trim());
+        long result = repeatedString(s, n);
+        Console.WriteLine(result);
+    }
+    private static long repeatedString(string s, long n)
+    {
+        #region version_1
+        /*
+        string sext = s;
+        while (sext.Length<=n)
+        {
+            sext = sext + s;
+        }
+        if(sext.Length>n)
+        {
+            int rmv = sext.Length-int.Parse(n.ToString());
+            sext=sext.Substring(0,sext.Length - rmv);
+        }
+        return sext.ToArray().Where(w => w == 'a').Count();
+        */
+        #endregion
+
+        #region version_2
+        int len = s.Length;
+        int nnew=int.Parse(n.ToString());
+        int extra = s.Substring(0, s.Length - (nnew%len)).Where(w=>w=='a').Count();
+        int hit = s.Where(w => w == 'a').Count();
+        return ((nnew / len) * hit) + extra;
+        #endregion
+    }
+
 }
