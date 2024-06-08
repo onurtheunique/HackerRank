@@ -76,8 +76,9 @@ class Solution
         //InsertionSortPart1.Starter(args);
         //SherlockandSquares.Starter(args);
         //ClimbingtheLeaderboard.Starter(args);
+        //RepeatedString.Starter(args);
         #endregion
-        RepeatedString.Starter(args);
+        EqualizeArray.Starter(args);
         Console.ReadLine();
     }
 }
@@ -2757,6 +2758,32 @@ class RepeatedString
         int hit = s.Where(w => w == 'a').Count();
         return ((nnew / len) * hit) + extra;
         #endregion
+    }
+
+}
+class EqualizeArray
+{
+    public static void Starter(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+        int result = equalizeArray(arr);
+        Console.WriteLine(result);
+    }
+    public static int equalizeArray(List<int> arr)
+    {
+        int toremove=0;
+        int min = 0;
+        foreach (int item in arr)
+        {
+            int count = arr.Where(w => w == item).Count();
+            if (count > min)
+            {
+                min = count;
+                toremove= item;
+            }
+        }
+        return arr.Where(w=>w!=toremove).Count();
     }
 
 }
