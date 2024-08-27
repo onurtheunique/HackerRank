@@ -34,7 +34,7 @@ def Counter():
     mustericount=int(input("Müşteri sayısı"))
     kazanc=0
     for i in range(mustericount):
-        talep=input("müştei talebini giriniz").split()
+        talep=input("müşteri talebini giriniz").split()
         for stok in mallar:
             if stok==talep[0]:
                 kazanc=kazanc+int(talep[1])
