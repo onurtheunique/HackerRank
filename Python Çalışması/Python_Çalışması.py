@@ -79,6 +79,4 @@ def mapOrnegi():
         if maxi<i and i!=forbiden:
             maxi=i
     print(maxi)
-    
-
 main()
